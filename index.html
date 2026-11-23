@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#256EF4">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="나루">
+<link rel="icon" type="image/png" href="assets/mascot4/m4-avatar.png">
+<link rel="apple-touch-icon" href="assets/mascot4/m4-avatar.png">
+<link rel="manifest" href="manifest.webmanifest">
+<title>NARU · 나루</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretendard-gov/1.3.9/static/pretendard-gov-dynamic-subset.min.css">
+<link rel="stylesheet" href="naru-v9.css?v=1795401937">
+<link rel="stylesheet" href="naru-ar.css?v=1795401937">
+<style>
+  html,body{margin:0;background:#E6E8EE;font-family:'Pretendard GOV','Pretendard Variable',Pretendard,sans-serif;color:#17181B}
+  #root{min-height:100vh;display:flex;align-items:center;justify-content:flex-start;gap:44px;padding:32px 24px;box-sizing:border-box}
+  #root>.rail{margin-left:auto} #root>.phones{margin-right:auto}
+  .rail{width:214px;flex-shrink:0;max-height:calc(100vh - 48px);overflow-y:auto;overflow-x:hidden}
+  .rail .h{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8B8D93;margin:22px 0 6px;font-weight:600}
+  .nb{display:flex;gap:10px;width:100%;text-align:left;font-family:inherit;font-size:13.5px;font-weight:500;padding:6px 10px;border:0;background:transparent;cursor:pointer;color:#4D4F55;border-radius:10px}
+  .nb:hover{background:rgba(255,255,255,.6)} .nb.on{background:#fff;color:#17181B;font-weight:600}
+  .nb i{font-style:normal;color:#BDBEC2;width:16px;font-size:11.5px;font-variant-numeric:tabular-nums;padding-top:1px}
+  .seg{display:flex;background:#DCDFE7;border-radius:12px;padding:3px;gap:2px}
+  .seg button{flex:1;border:0;background:none;height:30px;border-radius:9px;font-family:inherit;font-size:12.5px;cursor:pointer;color:#4D4F55}
+  .seg button.on{background:#fff;color:#17181B;font-weight:600}
+  .demo{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .demo button{border:0;border-radius:10px;height:34px;font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer;background:#fff;color:#17181B}
+  .demo button.red{background:#D93131;color:#fff}
+  .phones{display:flex;gap:40px}
+  .note{font-size:11.5px;line-height:1.55;color:#8B8D93;margin-top:16px}
+  @media (max-width:1000px){.rail{display:none} #root>.phones{margin-left:auto}}
+  @media (max-width:860px){#root{padding:16px 0}.phones{flex-direction:column;align-items:center;gap:24px}}
+  /* 실제 휴대폰에서 열면: 틀 없이 화면 가득(가로 375 기준으로 맞춰 키운다) */
+  html.device,html.device body{background:#000;overflow:hidden;height:100%}
+  html.device #root{display:block;padding:0;min-height:0}
+  .dev{position:fixed;left:0;top:0;overflow:hidden}
+  .dev .n9{height:var(--devh)!important;border-radius:0!important;box-shadow:none!important}
+  .dev .n9.ar{--top:20px}
+  .dev .n9>div:first-child{display:none!important}
+  /* 시연 손잡이: 옆 여백(20px) 안의 가는 막대 — 화면의 글 · 거리 칩 · 목록을 가리지 않는다. 누르면 시연 메뉴 */
+  .dfab{position:fixed;right:0;top:42%;z-index:999;width:20px;height:72px;padding:0;border:0;background:transparent;color:transparent;font-size:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .dfab::after{content:"";position:absolute;right:3px;top:12px;width:5px;height:48px;border-radius:3px;background:rgba(30,33,36,.45);box-shadow:0 0 0 1px rgba(255,255,255,.8)}
+  .dfab:focus-visible::after{box-shadow:0 0 0 2px #fff,0 0 0 4px #256EF4}
+  .dmenu{position:fixed;right:24px;top:calc(42% - 60px);z-index:999;display:grid;gap:6px;padding:10px;border-radius:12px;background:#fff;box-shadow:0 10px 30px -10px rgba(0,0,0,.5)}
+  .dmenu button{border:0;border-radius:8px;height:44px;padding:0 16px;font:700 15px/1 inherit;background:#F4F5F6;color:#1E2124;cursor:pointer}
+  .dmenu button.red{background:#D93131;color:#fff}
+  .boot{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;background:#256EF4;color:#fff;font-size:17px;font-weight:700;line-height:1.5}
+</style>
+</head>
+<body>
+<div id="root"><div class="boot" role="status"><svg viewBox="0 0 156 34" height="30" fill="none" aria-label="NARU" style="overflow:visible"><g stroke="#fff" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 31V4l22 27V4"/><path d="M44 31L57.5 4L71 31"/><path d="M90 31V4h11.5a8.5 8.5 0 0 1 0 17H90M102 21l10 10"/><path d="M130 4v15.5a11 11 0 0 0 22 0V4"/></g><circle cx="57.5" cy="24" r="3.6" fill="#FFB114"/></svg><span>나루를 준비하고 있어요</span></div></div>
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="src/Kit9.jsx?v=1795401937"></script>
+<script src="assets/pano/list.js?v=1795401937"></script>
+<script src="assets/pano/walk.js?v=1795401937"></script>
+<script type="text/babel" src="src/Pano.jsx?v=1795401937"></script>
+<script src="assets/market/market.js?v=1795401937"></script>
+<script src="assets/market/risks3d.js?v=1795401937"></script>
+<script type="text/babel" src="src/Picto.jsx?v=1795401937"></script>
+<script type="text/babel" src="src/Market.jsx?v=1795401937"></script>
+<script type="text/babel" src="src/Lantern.jsx?v=1795401937"></script>
+<script type="text/babel" src="src/Ar.jsx?v=1795401937"></script>
+<script type="text/babel" src="src/World.jsx?v=1795401937"></script>
+<script type="text/babel" src="src/ScreensEvac.jsx?v=1795401937"></script>
+<script type="text/babel" src="src/ScreensWalk.jsx?v=1795401937"></script>
+<script type="text/babel" src="src/TopMap.jsx?v=1795401937"></script>
+<script type="text/babel" src="src/ScreensMain.jsx?v=1795401937"></script>
+<script type="text/babel" src="src/ScreensStart.jsx?v=1795401937"></script>
+<script type="text/babel" src="src/ScreensAuth.jsx?v=1795401937"></script>
+<script type="text/babel" src="src/Overlays.jsx?v=1795401937"></script>
+<script type="text/babel">
+// 나루 · 제출용 앱. 큰 화면 = 화면 목록(레일) + 낮 · 밤 두 대 / 휴대폰 = 틀 없이 화면 가득. 이전 화면은 archive.html 에 보관
+const GROUPS = [
+  ['처음 열 때', [['eSplash', '시작'], ['ePerm', '권한 안내'], ['eWelcome', '시작 · 로그인 고르기'], ['eTerms', '약관 동의'], ['eVerify', '본인 확인'], ['eProfile', '내 정보 설정'], ['eStart', '준비 끝 · 내 대피 카드'], ['eLoad', '연결 중 (다시 열 때)'], ['eLock', '경보 알림 (잠금 화면)']]],
+  ['평소', [['eNow', '홈 (스크롤)'], ['eNoti', '알림함'], ['eMap', '지도'], ['eFind', '대피'], ['eLearn', '배우기'], ['ePlan', '내 정보']]],
+  ['실제 경보', [['eRisk', '가는 길 조심할 곳'], ['eGuide', '길 안내 (직접 걷기)'], ['eDetour', '다른 곳으로 · 도움'], ['eArrive', '도착']]],
+  ['연습', [['eWater', '물 높이 체험']]],
+];
+const COMP = { eSplash: ESplash, ePerm: EPerm, eWelcome: EWelcome, eTerms: ETerms, eVerify: EVerify, eProfile: EProfile, eLoad: ELoad, eStart: EStart, eLock: ELock, eNow: ENow, eNoti: ENoti, eMap: EMap, eFind: EFind, eGuide: EGuide, eArrive: EArrive, eDetour: EDetour, eWater: EWater, ePlan: EPlan, eLearn: ELearn, eRisk: ERisk };
+const FLAT = GROUPS.flatMap(g => g[1]);
+
+const App = () => {
+  const L = k => { try { return JSON.parse(localStorage.getItem('naru11-' + k)); } catch (e) { return null; } };
+  // 개발용 바로가기: ?screen=eNow&theme=light&st={"alert":1}&ui={"still":1}&bare=1  (bare = 화면 레일 없이 폰만, 저절로 넘어가지 않음)
+  //   ui.sheet = 처음부터 열어 둘 판 ({"k":"call","n":"119"}) · ui.toast = 짧은 알림 글 · ui.scroll = 스크롤 자리
+  const Q = new URLSearchParams(location.search);
+  const qSt = (() => { try { return JSON.parse(Q.get('st') || 'null'); } catch (e) { return null; } })();
+  const bare = Q.get('bare') === '1';
+  const ui = (() => { try { return JSON.parse(Q.get('ui') || '{}') || {}; } catch (e) { return {}; } })();
+  if (bare && ui.still == null) ui.still = 1;
+  const [vw, setVw] = React.useState({ w: innerWidth, h: innerHeight });
+  React.useEffect(() => { const f = () => setVw({ w: innerWidth, h: innerHeight }); addEventListener('resize', f); return () => removeEventListener('resize', f); }, []);
+  const device = !bare && Q.get('frame') !== '1' && vw.w < 520;       // 실제 휴대폰: 틀 없이
+  React.useEffect(() => { document.documentElement.classList.toggle('device', device); }, [device]);
+  const [scr, setScr] = React.useState(COMP[Q.get('screen')] ? Q.get('screen') : COMP[L('scr')] ? L('scr') : 'eSplash');
+  const [theme, setTheme] = React.useState(['both', 'light', 'dark'].includes(Q.get('theme')) ? Q.get('theme') : L('theme') || (innerWidth < 860 ? 'light' : 'both'));
+  // bare(캡처) = 저장된 상태를 섞지도 남기지도 않는다 — 앞 캡처의 걸음 · 알림 설정이 다음 장에 새지 않게
+  const [st, setSt] = React.useState(bare ? { ...(qSt || {}) } : { ...(L('st') || {}), ...(qSt || {}) });
+  const set = p => setSt(s => ({ ...s, ...p }));
+  React.useEffect(() => { if (bare) return; try { ['scr', 'theme', 'st'].forEach((k, i) => localStorage.setItem('naru11-' + k, JSON.stringify([scr, theme, st][i]))); } catch (e) { } }, [scr, theme, st]);
+  // 아래에서 올라오는 판 · 짧은 알림 (낮 · 밤 두 대가 같은 것을 보여 준다)
+  const [ov, setOv] = React.useState(ui.sheet || null), [tm, setTm] = React.useState(ui.toast || null), tmRef = React.useRef(0);
+  const toast = t => { setTm(t); clearTimeout(tmRef.current); tmRef.current = setTimeout(() => setTm(null), 2600); };
+  const go = k => { setOv(null); setScr(COMP[k] ? k : 'eNow'); };
+  const reset = () => { setOv(null); setSt({}); setScr('eSplash'); };
+  const scrRef = React.useRef(scr); scrRef.current = scr;
+  React.useEffect(() => {
+    if (bare) return;
+    const onPop = () => {
+      const q = s => document.querySelector(s);
+      const b = q('.n9 .ov-head .ar-ib') || q('.n9 .ar-band .bar .ar-ib[aria-label="뒤로"]') || q('.n9 .pg-top .bar .ar-ib[aria-label="뒤로"]') || q('.n9 .ar-band .bar .ar-ib[aria-label="연습 닫기"]');
+      if (b) b.click(); else if (['eMap', 'eFind', 'eLearn', 'ePlan'].includes(scrRef.current)) setScr('eNow'); else return;
+      try { history.pushState({ naru: 1 }, ''); } catch (e) { }
+    };
+    try { history.pushState({ naru: 1 }, ''); } catch (e) { }
+    addEventListener('popstate', onPop); return () => removeEventListener('popstate', onPop);
+  }, []);
+  const C = COMP[scr];
+  const idx = FLAT.findIndex(x => x[0] === scr);
+  const label = String(idx + 1).padStart(2, '0') + ' ' + (FLAT[idx] || ['', ''])[1];
+  // 라이트 = 낮(평소 14:00 · 경보 15:40), 다크 = 밤(평소 21:00 · 경보 22:40)
+  const drillM = st.mode === 'drill', real = !!st.alert && !drillM;
+  const alertClock = scr === 'eLock' || (['eGuide', 'eArrive', 'eDetour'].includes(scr) ? !drillM : ['eNow', 'eFind', 'eRisk', 'eNoti'].includes(scr) && real);
+  const clock = night => (alertClock ? ltTime(night).alert : ltTime(night).calm);
+  // 시연 단추 (폰 화면 안에는 시연용 단추를 두지 않는다 — 큰 화면은 레일, 휴대폰은 옆의 작은 '시연' 단추)
+  const sendAlert = () => { setOv(null); set({ alert: 1, alertSaid: 0, mode: 'real', arrived: null, here: 0, step: 0, at: null, sel: null, rkFocus: null, from: null, rk: null, rkMode: null, walkS: null, walkFrom: null, detourAt: null, detourFrom: null, wfrom: null, waitAt: null, notiRead: 0 }); setScr('eLock'); };
+  const endAlert = () => { setOv(null); set({ alert: 0, lastAlert: st.alert ? 1 : st.lastAlert || 0, alertSaid: 0, mode: 'real', arrived: null, here: 0, step: 0, at: null, sel: null, rkFocus: null, from: null, rk: null, rkMode: null, walkS: null, walkFrom: null, detourAt: null, detourFrom: null, wfrom: null, waitAt: null }); setScr('eNow'); };
+  const inner = night => (
+    <div className={'fsz fs-' + (st.fs || 'm') + (st.hc ? ' hc' : '')} style={{ display: 'contents' }}>
+      <C go={go} st={st} set={set} ui={ui} night={night} pop={setOv} toast={toast} />
+      <Overlay ov={ov} close={() => setOv(null)} toast={toast} st={st} reset={reset} />
+      <Toast text={tm} />
+    </div>
+  );
+  const [menu, setMenu] = React.useState(false);
+  if (device) {
+    const k = vw.w / 375, H = Math.round(vw.h / k);
+    const night = st.devNight != null ? !!st.devNight : !!(window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+    const act = f => () => { setMenu(false); f(); };
+    return (
+      <>
+        <div className="dev" style={{ width: vw.w, height: vw.h }}>
+          <div style={{ width: 375, height: H, transform: `scale(${k})`, transformOrigin: '0 0', '--devh': H + 'px' }}>
+            <Phone dark={night} label={label} time={clock(night)} skin="ar">{inner(night)}</Phone>
+          </div>
+        </div>
+        {Q.get('demo') !== '0' && <button className="dfab" aria-label="시연 메뉴" onClick={() => setMenu(v => !v)}>시연</button>}
+        {menu && <div className="dmenu">
+          <button className="red" onClick={act(sendAlert)}>경보 보내기</button>
+          <button onClick={act(endAlert)}>경보 끝내기</button>
+          <button onClick={act(() => set({ devNight: !night }))}>{night ? '낮으로' : '밤으로'}</button>
+          <button onClick={act(reset)}>처음 상태로</button>
+        </div>}
+      </>
+    );
+  }
+  let n = 0;
+  return (
+    <>
+      <div className="rail" style={bare ? { display: 'none' } : null}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}><Logo h={10} /><span style={{ fontSize: 11, color: '#8B8D93' }}>공공 서비스판 · 낮과 밤</span></div>
+        <div className="h">모드</div>
+        <div className="seg">{[['both', '나란히'], ['light', '낮 · 라이트'], ['dark', '밤 · 다크']].map(([k, l]) => <button key={k} className={theme === k ? 'on' : ''} onClick={() => setTheme(k)}>{l}</button>)}</div>
+        <div className="h">시연</div>
+        <div className="demo">
+          <button className="red" onClick={sendAlert}>경보 보내기</button>
+          <button onClick={endAlert}>경보 끝내기</button>
+          <button onClick={reset}>처음 상태로</button>
+        </div>
+        {GROUPS.map(([g, items]) => (
+          <div key={g}>
+            <div className="h">{g}</div>
+            {items.map(([k, l]) => { n++; return <button key={k} className={'nb' + (scr === k ? ' on' : '')} onClick={() => go(k)}><i>{String(n).padStart(2, '0')}</i>{l}</button>; })}
+          </div>
+        ))}
+        <div className="note">라이트는 낮, 다크는 밤이에요. 길과 물 화면의 배경은 언리얼 원본 렌더예요. 실측이 아닌 값에는 '예시'. 119 · 112 · 로그인은 시연이라 실제로 걸리거나 보내지지 않아요. 이전 화면은 archive.html에 있어요.</div>
+      </div>
+      <div className="phones">
+        {theme !== 'dark' && <Phone label={label + ' · 낮'} time={clock(false)} skin="ar">{inner(false)}</Phone>}
+        {theme !== 'light' && <Phone dark label={label + ' · 밤'} time={clock(true)} skin="ar">{inner(true)}</Phone>}
+      </div>
+    </>
+  );
+};
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<!-- 앱의 부품(src/*.jsx)이 'assets/...'를 앱 뿌리 기준으로 부른다. 앱 파일을 고치지 않고 경로를 맞추려고 이 쪽의 기준을 한 단계 위(naru/)로 둔다.
+     그래서 이 파일의 모든 상대 경로는 naru/ 기준이다: 내 스타일 = web/site.css, 같은 쪽 링크 = web/#id, 앱 = index.html -->
+<base href="../">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>나루 · 1913 송정역시장 침수 대피 안내</title>
+<meta name="description" content="광주 광산구 송정동 1913 송정역시장의 침수 대피 안내(공모전 시제품). 물이 오기 전에, 안전한 곳으로.">
+<link rel="icon" href="data:,">
+<script>
+  // 그리기 전에: 자바스크립트 표시 · 저장해 둔 글자 크기 (깜빡이지 않게). 저장소가 막혀 있으면 그냥 '보통'
+  (function () { var d = document.documentElement; d.classList.add('js');
+    try { var f = localStorage.getItem('naru-web-fs'); if (f === 'l' || f === 'xl') d.setAttribute('data-fs', f); } catch (e) {} })();
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretendard-gov/1.3.9/static/pretendard-gov-dynamic-subset.min.css">
+<link rel="stylesheet" href="naru-ar.css?v=1795401937">
+<link rel="stylesheet" href="web/site.css?v=1795401937">
+</head>
+<body>
+<div class="n9 ar site" id="ws">
+
+  <!-- 이유 (1): KRDS 디지털 포용 구성요소 + 정체 밝히기. 맨 위 줄은 KRDS가 공식 누리집 배너를 두는 자리인데, 나루는 공식 서비스가 아니므로
+       그 자리에 '시제품 · 정부의 공식 서비스가 아니에요'를 적는다(앱의 같은 말). 키보드 · 화면 낭독기 사용자는 '본문 바로가기'로 머리말을 건너뛰고,
+       눈이 어두운 어르신은 '글자 크기'로 글만 키운다(뿌리 글자 크기를 바꾸면 rem 으로 적은 글이 함께 커지고, 칸은 저절로 줄어든다).
+       큰 글자에서는 PC 머리말이 두 줄이 되고, 모바일에서는 장식(나루)을 접어 글에 폭을 준다 — 넘치거나 겹치지 않게. -->
+  <a class="ws-skip" href="web/#main">본문 바로가기</a>
+  <div class="ws-util">
+    <div class="ws-wrap">
+      <!-- KRDS '공식 누리집' 배너가 놓일 맨 위 자리에, 그 반대를 밝힌다: 정부의 공식 서비스가 아님 -->
+      <p class="ws-util-note"><span><i data-lucide="info" width="16" height="16" stroke-width="2" aria-hidden="true"></i></span><span>시제품 · 정부의 공식 서비스가 아니에요</span></p>
+      <div class="ws-fs" role="group" aria-labelledby="ws-fs-l">
+        <span class="ws-fs-l" id="ws-fs-l">글자 크기</span>
+        <div class="ws-seg">
+          <button type="button" data-fs="" aria-pressed="true">보통</button>
+          <button type="button" data-fs="l" aria-pressed="false">크게</button>
+          <button type="button" data-fs="xl" aria-pressed="false">아주 크게</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 이유 (2): KRDS 머리말 = 왼쪽 로고 · 주 메뉴 · 오른쪽 주요 행동 하나. 로고는 정부 상징 대신 나루 로고(앱과 같은 부품).
+       나루는 정부의 공식 서비스가 아니므로 '공식 전자정부 누리집' 배너 · 운영기관 식별자 · 태극 상징을 쓰지 않고(KRDS가 금함),
+       대신 로고 옆에 '공모전 시제품'을 적어 처음부터 오해가 없게 한다. 메뉴 다섯은 이 쪽의 구역 순서 그대로, 1024px 아래에서는 '메뉴' 단추로 접는다. -->
+  <header class="ws-head">
+    <div class="ws-wrap ws-head-in">
+      <a class="ws-brand" href="web/">
+        <span class="ws-logo" id="ws-logo-head">NARU</span>
+        <span class="ws-brand-name">나루</span>
+        <span class="ws-proto"><span class="ws-proto-a">공모전</span><span>시제품</span></span>
+      </a>
+      <button class="ws-menu-btn" type="button" aria-expanded="false" aria-controls="ws-nav">
+        <span class="m"><i data-lucide="menu" width="22" height="22" stroke-width="2" aria-hidden="true"></i></span><span class="x"><i data-lucide="x" width="22" height="22" stroke-width="2" aria-hidden="true"></i></span>메뉴
+      </button>
+      <nav class="ws-nav" id="ws-nav" aria-label="주 메뉴">
+        <ul>
+          <li><a href="web/#now">지금 상황</a></li>
+          <li><a href="web/#map">대피 지도</a></li>
+          <li><a href="web/#guide">행동요령</a></li>
+          <li><a href="web/#practice">미리 연습</a></li>
+          <li><a href="web/#about">서비스 소개</a></li>
+          <li class="ws-nav-cta"><a class="ws-btn pri" href="index.html">앱으로 연습하기</a></li>
+        </ul>
+      </nav>
+      <a class="ws-btn pri" href="index.html"><i data-lucide="smartphone" width="20" height="20" stroke-width="2" aria-hidden="true"></i>앱으로 연습하기</a>
+    </div>
+  </header>
+
+  <!-- 이유 (3): KRDS 긴급 공지 패턴 = 한 줄 · 이름 붙은 링크 하나 · 닫을 수 없음. 앱 홈 맨 위와 같은 자리 · 같은 말.
+       평소에는 '안내'(정보 파랑)로 장마 전 연습을 권하고, 실제 경보 때는 같은 자리가 빨간 '경보'로 바뀐다. -->
+  <div class="ws-crit" role="region" aria-label="긴급 공지">
+    <div class="ws-wrap">
+      <span class="ws-crit-bd">안내</span>
+      <p class="ws-crit-tx">장마 전에 우리 시장 대피를 연습해 둬요</p>
+      <a class="ws-crit-ln" href="web/#practice">미리 연습<i data-lucide="chevron-right" width="18" height="18" stroke-width="2.2" aria-hidden="true"></i></a>
+    </div>
+  </div>
+
+  <main id="main" tabindex="-1">
+
+    <!-- 이유 (4): KRDS 방문 패턴 '시급한 정보 먼저' — 첫 화면이 '여기 지금 위험한가'와 '경보가 오면 어디로'에 바로 답한다.
+         상태 = 공식 홍수 4단계(관심 · 주의 · 경계 · 심각) 사다리 + 기준 시각 · 출처(최신 · 정확, 실시간 연동 전이라 '예시').
+         갈 곳 = 두 갈래(물이 들기 전 = 밖으로, 물이 들면 = 가장 가까운 높은 건물 위층: 영국 · 일본 공식 권고). 거리는 앱의 decide()가
+         레벨에서 잰 길로 계산한 값을 그대로 쓴다. 보행보조차는 한 단계 일찍(일본 '고령자 등 대피' 단계) — 사다리의 '주의' 아래에
+         '보행보조차는 여기서 나서요' 표를 하나 달아, 단계 이름이 내 할 일과 이어지게 한다.
+         파란 판 = 앱 머리 판과 같은 색(평상) · 같은 옅은 고리(DropWm). 나루(마스코트)는 등불을 든 길잡이로, 이 화면에 한 번만. -->
+    <section id="now" aria-labelledby="ws-h1">
+      <div class="ws-hero">
+        <div class="ws-hero-wm" id="ws-hero-wm" aria-hidden="true"></div>
+        <div class="ws-wrap ws-hero-top">
+          <div class="ws-hero-tx">
+            <p class="ws-hero-place"><i data-lucide="map-pin" width="18" height="18" stroke-width="2.2" aria-hidden="true"></i>광주 광산구 송정동</p>
+            <h1 id="ws-h1">1913 송정역시장 침수 대피 안내</h1>
+            <p class="ws-hero-sub">물이 오기 전에, 안전한 곳으로</p>
+          </div>
+          <div class="ws-hero-naru" id="ws-naru-hero" aria-hidden="true"></div>
+        </div>
+      </div>
+      <div class="ws-wrap ws-hero-cards">
+        <article class="ws-card" aria-labelledby="ws-st-h">
+          <h2 class="ws-card-h" id="ws-st-h">지금 송정동</h2>
+          <div id="ws-status" class="ws-status"><p class="ws-lv-big">지금은 <b>대피하지 않아도 돼요</b></p></div>
+        </article>
+        <article class="ws-card" aria-labelledby="ws-plan-h">
+          <h2 class="ws-card-h" id="ws-plan-h">경보가 오면</h2>
+          <p class="ws-card-sub">보행보조차로 가게 문을 나설 때 · 걷는 길로 잰 거리</p>
+          <div id="ws-plan" class="ws-plan"><p class="ws-wait">갈 곳을 계산하고 있어요…</p></div>
+          <a class="ws-more" href="web/#map">대피 지도에서 길 보기<i data-lucide="chevron-right" width="18" height="18" stroke-width="2.2" aria-hidden="true"></i></a>
+        </article>
+      </div>
+    </section>
+
+    <!-- 이유 (5): FEMA · 브런치 참고 — 위험한 곳과 안전한 곳을 색으로 나눈 지도. 지도만 두지 않고 곁에 글 목록(번호 · 이름 · 거리 · 건물 높이):
+         경보 연구에서 글로 적은 위치가 지도만보다 잘 읽혔다. 색은 앱과 같은 뜻으로, 늘 글과 함께(초록 = 길 · 안전한 곳 — 피난 유도 표지의 색,
+         빨강 = 빠짐 · 감전, 노랑 = 걸림 · 미끄럼). 목록에서 고른 곳은 지도의 초록 길과 같은 색으로 묶인다.
+         바탕은 배경데이터 레벨을 45m 위에서 곧장 내려다본 원본 렌더(고치지 않음), 그 위의 자리는 모두 레벨에서 잰 좌표. 앱의 TopMap 부품 그대로. -->
+    <section class="ws-sec" id="map" aria-labelledby="ws-map-h">
+      <div class="ws-wrap">
+        <h2 class="ws-sec-h" id="ws-map-h">대피 지도</h2>
+        <p class="ws-lead">위가 시장 입구, 아래가 내 가게예요. 목록에서 곳을 고르면 그곳까지 가는 길을 지도에 그려요.</p>
+        <div id="ws-mapblock">
+          <div class="ws-mapgrid"><div class="ws-map"><p class="ws-wait">지도를 불러오고 있어요…</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 이유 (6): 가장 가까운 공식 홍수특보 관측소(황룡강 장록교)의 수위를 공식 4단계 기준선과 함께 — 숫자만이 아니라 '어느 단계인가'.
+         지난 기록은 실제 날짜 · 숫자로만(시장이 잠겼다고 꾸미지 않는다). 근처 민방위 대피소가 모두 지하라는 사실은
+         홍수 때 가장 위험한 착각이라 따로 경고한다. 세 카드는 앱 홈의 같은 값(LOCAL · GaugeCard)을 그대로 쓴다. -->
+    <section class="ws-sec" id="info" aria-labelledby="ws-info-h">
+      <div class="ws-wrap">
+        <h2 class="ws-sec-h" id="ws-info-h">강 수위 · 기록 · 대피소</h2>
+        <p class="ws-lead">가장 가까운 공식 관측소의 강 수위, 이 동네의 지난 기록, 대피소에서 조심할 점이에요.</p>
+        <div class="ws-row3">
+          <article class="ws-card ws-gauge" aria-labelledby="ws-g-h">
+            <h3 class="ws-card-h" id="ws-g-h">황룡강 장록교 수위</h3>
+            <div id="ws-gauge" class="ws-gauge-body"><p class="ws-wait">불러오고 있어요…</p></div>
+          </article>
+          <article class="ws-card" aria-labelledby="ws-hs-h">
+            <h3 class="ws-card-h" id="ws-hs-h">이 동네의 기록</h3>
+            <div id="ws-hist"><p class="ws-wait">불러오고 있어요…</p></div>
+          </article>
+          <article class="ws-card" aria-labelledby="ws-sh-h">
+            <h3 class="ws-card-h" id="ws-sh-h">대피소 주의</h3>
+            <div id="ws-shelter"><p class="ws-wait">불러오고 있어요…</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 이유 (7): 행정안전부 국민행동요령(호우 · 홍수)의 '전 · 중 · 후' 세 단 구조 그대로, 우리 시장 · 보행보조차에 맞는 것만 골랐다.
+         특보 기준(기상청)을 숫자로 두어 '비가 얼마나 오면 경보인가'를 스스로 가늠하게 한다. 특보 이름 칩의 색은 단계 색
+         (주의보 = 노랑 '주의', 경보 · 긴급재난문자 = 빨강 — 앱 '배우기' 화면의 같은 카드와 같은 칩)이고 늘 글과 함께. -->
+    <section class="ws-sec" id="guide" aria-labelledby="ws-guide-h">
+      <div class="ws-wrap">
+        <h2 class="ws-sec-h" id="ws-guide-h">행동요령</h2>
+        <p class="ws-lead">국민행동요령(호우 · 홍수)에서 우리 시장에 꼭 맞는 것만 골랐어요.</p>
+        <div class="ws-row3">
+          <article class="ws-card ws-phase" aria-labelledby="ws-p1-h">
+            <h3 class="ws-card-h" id="ws-p1-h"><span class="ws-ic"><i data-lucide="cloud" width="24" height="24" stroke-width="2" aria-hidden="true"></i></span>비 오기 전</h3>
+            <ul>
+              <li>우리 가게에서 가장 가까운 높은 건물 알아 두기</li>
+              <li>걸음이 느리면 한 단계 일찍 나설 시간 정하기</li>
+              <li>약 · 신분증 챙길 것 정하기</li>
+            </ul>
+          </article>
+          <article class="ws-card ws-phase" aria-labelledby="ws-p2-h">
+            <h3 class="ws-card-h" id="ws-p2-h"><span class="ws-ic"><i data-lucide="cloud-rain" width="24" height="24" stroke-width="2" aria-hidden="true"></i></span>비가 많이 올 때</h3>
+            <ul>
+              <li>지하 공간에서 바로 나오기</li>
+              <li>맨홀 · 전신주 · 전기함에서 멀리</li>
+              <li>물이 무릎(약 50cm)에 닿으면 걷지 말고 가까운 건물 위층으로</li>
+              <li>물살이 있으면 15cm만 돼도 넘어질 수 있어요</li>
+            </ul>
+          </article>
+          <article class="ws-card ws-phase" aria-labelledby="ws-p3-h">
+            <h3 class="ws-card-h" id="ws-p3-h"><span class="ws-ic"><i data-lucide="sun" width="24" height="24" stroke-width="2" aria-hidden="true"></i></span>비가 그친 뒤</h3>
+            <ul>
+              <li>물이 빠져도 전기 · 가스 점검 전에는 들어가지 않기</li>
+              <li>젖은 손으로 전기 만지지 않기</li>
+            </ul>
+          </article>
+        </div>
+        <div class="ws-card ws-rules">
+          <h3 class="ws-card-h">호우 특보 기준 (기상청)</h3>
+          <dl>
+            <div><dt><span class="lv-chip c2">호우주의보</span></dt><dd>3시간 60mm 또는 12시간 110mm 예상</dd></div>
+            <div><dt><span class="lv-chip c4">호우경보</span></dt><dd>3시간 90mm 또는 12시간 180mm 예상</dd></div>
+            <div><dt><span class="lv-chip c4">호우 긴급재난문자</span></dt><dd>1시간 50mm와 3시간 90mm가 함께, 또는 1시간 72mm — 기상청이 읍면동마다 바로 보내요</dd></div>
+          </dl>
+        </div>
+        <p class="ar-src"><span><i data-lucide="file-text" width="16" height="16" stroke-width="2" aria-hidden="true"></i></span><span>출처: 국민행동요령(호우 · 홍수) · 행정안전부 / 호우 특보 기준 · 기상청</span></p>
+      </div>
+    </section>
+
+    <!-- 이유 (8): 교육과 실제 상황은 다른 화면이어야 한다(멘토 · 심폐소생술 교육 비유). 평소에 해 보고, 틀리면 바로 고쳐 보는 연습이 기억에 남는다.
+         세 카드는 앱의 연습 화면으로 바로 열리고(연습 모드로 열리게 st 를 함께 보낸다), 연습 화면에는 늘 '연습 · 실제 아님' 표시가 붙어
+         실제 경보와 헷갈리지 않는다. 나루는 물 높이를 재는 자를 들고 여기서 한 번만. -->
+    <section class="ws-sec" id="practice" aria-labelledby="ws-prac-h">
+      <div class="ws-wrap">
+        <div class="ws-sec-head">
+          <div>
+            <h2 class="ws-sec-h" id="ws-prac-h">미리 연습</h2>
+            <p class="ws-lead">해 보고, 틀리면 바로 고쳐 보는 연습이 기억에 남아요 (심폐소생술 교육처럼).</p>
+          </div>
+          <div class="ws-prac-naru" id="ws-naru-prac" aria-hidden="true"></div>
+        </div>
+        <div class="ws-row3">
+          <article class="ws-card ws-prac">
+            <div class="top"><span class="ws-ic"><i data-lucide="waves" width="24" height="24" stroke-width="2" aria-hidden="true"></i></span><span class="ar-prac"><i></i>연습</span></div>
+            <h3 class="ws-card-h"><a data-app="eWater" href="index.html?screen=eWater&amp;st=%7B%22mode%22%3A%22drill%22%2C%22lv%22%3A1%2C%22flow%22%3Anull%2C%22step%22%3A0%2C%22at%22%3Anull%2C%22from%22%3A%22now%22%2C%22wfrom%22%3Anull%7D">물 높이 체험</a></h3>
+            <p>종아리 · 무릎 · 허리까지 찬 골목을 보고, 보행보조차로 어디까지 갈 수 있는지 알아봐요.</p>
+            <span class="go" aria-hidden="true">앱에서 열기<i data-lucide="arrow-right" width="18" height="18" stroke-width="2.2"></i></span>
+          </article>
+          <article class="ws-card ws-prac">
+            <div class="top"><span class="ws-ic"><i data-lucide="footprints" width="24" height="24" stroke-width="2" aria-hidden="true"></i></span><span class="ar-prac"><i></i>연습</span></div>
+            <h3 class="ws-card-h"><a data-app="eGuide" href="index.html?screen=eGuide&amp;st=%7B%22mode%22%3A%22drill%22%2C%22dest%22%3A%22s0%22%2C%22step%22%3A0%2C%22lv%22%3A0%2C%22at%22%3Anull%2C%22from%22%3A%22now%22%2C%22rkFocus%22%3Anull%2C%22rkMode%22%3Anull%2C%22walkS%22%3Anull%2C%22walkFrom%22%3Anull%2C%22detourAt%22%3Anull%7D">길 미리 걷기</a></h3>
+            <p>가게 문에서 입구 밖까지, 1m마다 렌더한 골목을 직접 걸어 봐요.</p>
+            <span class="go" aria-hidden="true">앱에서 열기<i data-lucide="arrow-right" width="18" height="18" stroke-width="2.2"></i></span>
+          </article>
+          <article class="ws-card ws-prac">
+            <div class="top"><span class="ws-ic"><i data-lucide="triangle-alert" width="24" height="24" stroke-width="2" aria-hidden="true"></i></span><span class="ar-prac"><i></i>연습</span></div>
+            <h3 class="ws-card-h"><a data-app="eRisk" href="index.html?screen=eRisk&amp;st=%7B%22mode%22%3A%22drill%22%2C%22rk%22%3A%22eNow%22%2C%22dest%22%3A%22s0%22%7D">가는 길 조심할 곳</a></h3>
+            <p>맨홀 · 전기함 · 가게 턱을 실제 렌더로 미리 봐요.</p>
+            <span class="go" aria-hidden="true">앱에서 열기<i data-lucide="arrow-right" width="18" height="18" stroke-width="2.2"></i></span>
+          </article>
+        </div>
+        <p class="ws-prac-note"><span class="ar-prac"><i></i>연습 · 실제 아님</span><span>연습 화면에는 늘 이 표시가 붙어 있어요. 실제 경보와 헷갈리지 않게요.</span></p>
+      </div>
+    </section>
+
+    <!-- 이유 (9): 공모전 평가(배경데이터 활용 · 원형 유지)와 믿음 — 무엇을 바꾸지 않았고 무엇을 더했는지 세 줄로 밝히고, 증빙 쪽으로 잇는다.
+         '예시' 표시의 뜻(재지 않은 값)도 여기서 한 번 설명한다. -->
+    <section class="ws-sec" id="about" aria-labelledby="ws-about-h">
+      <div class="ws-wrap">
+        <h2 class="ws-sec-h" id="ws-about-h">서비스 소개 · 배경데이터</h2>
+        <p class="ws-lead">나루는 1913 송정역시장 한 곳을 위한 침수 대피 안내예요. 보행보조차를 쓰는 78세 상인도 물이 오기 전에 안전한 곳에 닿도록, 3D 배경데이터(언리얼 레벨)에서 길과 위험을 찾았어요.</p>
+        <div class="ws-row3">
+          <article class="ws-card ws-point">
+            <span class="ws-ic"><i data-lucide="shield-check" width="24" height="24" stroke-width="2" aria-hidden="true"></i></span>
+            <h3>배경데이터 그대로</h3>
+            <p>원본 파일 1,394개의 해시가 처음과 같아요. 레벨은 읽기만 하고 고치지 않았어요.</p>
+          </article>
+          <article class="ws-card ws-point">
+            <span class="ws-ic"><i data-lucide="ruler" width="24" height="24" stroke-width="2" aria-hidden="true"></i></span>
+            <h3>레벨에서 잰 거리 · 높이</h3>
+            <p>골목 길이, 건물 높이, 문과 위험물의 자리는 레벨에서 잰 값이에요. 걷는 빠르기처럼 재지 않은 값에는 ‘예시’를 붙였어요.</p>
+          </article>
+          <article class="ws-card ws-point">
+            <span class="ws-ic"><i data-lucide="layers" width="24" height="24" stroke-width="2" aria-hidden="true"></i></span>
+            <h3>렌더 위에는 길 · 위험 · 거리만</h3>
+            <p>원본 렌더 파일은 손대지 않고, 그 위에 가는 길과 위험 표시, 거리만 얹었어요.</p>
+          </article>
+        </div>
+        <p class="ws-about-link"><a class="ws-btn sec" href="evidence.html">원형 유지 증빙 보기<i data-lucide="arrow-right" width="18" height="18" stroke-width="2.2" aria-hidden="true"></i></a></p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 이유 (10): 정부 서비스로 오해하지 않게(KRDS는 비공식 누리집의 공식 표시를 금한다) 시제품 고지를 맨 먼저,
+       디자인 토큰 출처(공공누리 제1유형은 출처 표시가 조건), 화면에 쓴 공식 자료의 출처를 한곳에 모은다. -->
+  <footer class="ws-foot">
+    <div class="ws-wrap">
+      <div class="ws-foot-brand"><span class="ws-logo" id="ws-logo-foot">NARU</span><span class="ws-foot-name">나루 · 1913 송정역시장 침수 대피 안내</span></div>
+      <p class="ws-foot-disc"><b>나루는 공모전 시제품이며 정부의 공식 서비스가 아닙니다.</b> ‘예시’가 붙은 값은 실제 상황이 아니에요. 위급할 때는 119(구조 · 구급 · 화재), 112(경찰)에 알리세요.</p>
+      <div class="ws-foot-grid">
+        <div>
+          <h2 class="ws-foot-h">자료 출처</h2>
+          <ul>
+            <li><b>영산강홍수통제소</b> — 장록교 관측소 · 홍수특보 기록</li>
+            <li><b>광주지방기상청</b> — 2025.7.17 강수 기록</li>
+            <li><b>광산구</b> — 민방위 대피시설 목록</li>
+            <li><b>기상청</b> — 호우 특보 기준</li>
+            <li><b>행정안전부</b> — 국민행동요령(호우 · 홍수)</li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="ws-foot-h">만든 바탕</h2>
+          <ul>
+            <li>디자인 토큰: KRDS (Korea Design System), 행정안전부 — 공공누리 제1유형</li>
+            <li>3D 배경데이터: 1913 송정역시장 레벨 — GICON 제1회 배경데이터 활용 콘텐츠개발 아이디어 공모전</li>
+            <li>글꼴: Pretendard GOV</li>
+            <li><a href="index.html">앱 시제품</a> · <a href="evidence.html">원형 유지 증빙</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<script>
+  // 쪽의 움직임 (바벨 없이 바로): 아이콘 · 글자 크기 · 메뉴 · 같은 쪽 링크
+  (function () {
+    var root = document.documentElement;
+    if (window.lucide) window.lucide.createIcons();
+
+    // 글자 크기 (보통 100% · 크게 130% · 아주 크게 150%) — 고른 값은 이 브라우저에만 남는다
+    var KEY = 'naru-web-fs', seg = document.querySelectorAll('.ws-seg button');
+    function setFs(v, save) {
+      if (v) root.setAttribute('data-fs', v); else root.removeAttribute('data-fs');
+      for (var i = 0; i < seg.length; i++) seg[i].setAttribute('aria-pressed', String(seg[i].getAttribute('data-fs') === v));
+      if (save) { try { if (v) localStorage.setItem(KEY, v); else localStorage.removeItem(KEY); } catch (e) {} }
+    }
+    setFs(root.getAttribute('data-fs') || '', false);
+    for (var i = 0; i < seg.length; i++) seg[i].addEventListener('click', function () { setFs(this.getAttribute('data-fs'), true); });
+
+    // 메뉴 (1024px 아래)
+    var btn = document.querySelector('.ws-menu-btn'), nav = document.getElementById('ws-nav');
+    function menu(open) { if (!btn || !nav) return; btn.setAttribute('aria-expanded', String(open)); nav.classList.toggle('open', open); }
+    if (btn) btn.addEventListener('click', function () { menu(btn.getAttribute('aria-expanded') !== 'true'); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && btn && btn.getAttribute('aria-expanded') === 'true') { menu(false); btn.focus(); } });
+
+    // 같은 쪽 링크: <base> 때문에 'web/#id'로 적었다. 주소가 /web/index.html 이어도 다시 불러오지 않고 그 자리로 옮기고 초점도 함께
+    function page(p) { return p.replace(/index\.html$/, ''); }
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest ? e.target.closest('a[href]') : null;
+      if (!a || !a.hash || a.origin !== location.origin || page(a.pathname) !== page(location.pathname)) return;
+      var t = document.getElementById(decodeURIComponent(a.hash.slice(1)));
+      if (!t) return;
+      e.preventDefault(); menu(false);
+      if (location.hash !== a.hash) history.pushState(null, '', location.pathname + location.search + a.hash);
+      if (!t.hasAttribute('tabindex')) t.setAttribute('tabindex', '-1');
+      t.focus({ preventScroll: true });
+      t.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+    });
+  })();
+</script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<!-- 앱과 같은 부품 · 같은 순서 (../index.html 과 같다) -->
+<script type="text/babel" src="src/Kit9.jsx?v=1795401937"></script>
+<script src="assets/pano/list.js?v=1795401937"></script>
+<script src="assets/pano/walk.js?v=1795401937"></script>
+<script type="text/babel" src="src/Pano.jsx?v=1795401937"></script>
+<script src="assets/market/market.js?v=1795401937"></script>
+<script src="assets/market/risks3d.js?v=1795401937"></script>
+<script type="text/babel" src="src/Picto.jsx?v=1795401937"></script>
+<script type="text/babel" src="src/Market.jsx?v=1795401937"></script>
+<script type="text/babel" src="src/Lantern.jsx?v=1795401937"></script>
+<script type="text/babel" src="src/Ar.jsx?v=1795401937"></script>
+<script type="text/babel" src="src/World.jsx?v=1795401937"></script>
+<script type="text/babel" src="src/ScreensEvac.jsx?v=1795401937"></script>
+<script type="text/babel" src="src/ScreensWalk.jsx?v=1795401937"></script>
+<script type="text/babel" src="src/TopMap.jsx?v=1795401937"></script>
+<script type="text/babel" src="src/ScreensMain.jsx?v=1795401937"></script>
+<script type="text/babel">
+// 나루 웹 · 앱의 부품(Logo · Naru · TopMap · GaugeCard · Ico · ArEx)과 값(decide · MARKET · LOCAL · LVL · GAITS)을 그대로 쓰는 섬들.
+// 쪽의 글은 처음부터 HTML에 있고, 값이 필요한 곳만 여기서 그린다. 앱의 전역 이름과 부딪히지 않게 한 덩어리 안에 둔다.
+(() => {
+  const G = 'aid';                                         // 페르소나: 보행보조차를 쓰는 78세 상인
+  const D0 = decide(G, 0);                                 // 경보 순간 — 골목에 아직 물이 없다
+  const DW = decide(G, minutesUntil(.3));                  // 물이 든 뒤 — 종아리(30cm)
+  const b0 = D0.best, up = DW.best;
+  const exit = D0.list.find(s => s.exit);
+  const places = [exit, ...D0.list.filter(s => s.tall).sort((a, b) => a.dist - b.dist)].filter(Boolean).map((s, k) => ({ ...s, num: k + 1 }));
+  const risks = risksOn(exit || MARKET.safe[0]).filter(r => r.kind !== 'road');
+  const pname = s => (s.exit ? '입구 밖' : `${s.short} ${s.floors}층`);
+  const sev = r => SEV_OF[r.kind] || 'amber';
+
+  // 한 섬이 잘못돼도 나머지 쪽은 그대로
+  class Part extends React.Component {
+    constructor(p) { super(p); this.state = { bad: false }; }
+    static getDerivedStateFromError() { return { bad: true }; }
+    render() { return this.state.bad ? <p className="ws-wait">이 부분을 불러오지 못했어요. 앱 시제품에서 확인해 주세요.</p> : this.props.children; }
+  }
+  const mount = (id, node) => { const el = document.getElementById(id); if (el) ReactDOM.createRoot(el).render(<Part>{node}</Part>); };
+
+  // ─ 지금 송정동: 평상 · 공식 4단계 사다리 · 기준 시각(예시) · 출처
+  function Status() {
+    return (
+      <>
+        <div className="ws-lv-head"><span className="lv-chip c0">{LVL[0][0]}</span><span className="ws-lv-note">호우 특보 없음</span></div>
+        <p className="ws-lv-big">지금은 <b>대피하지 않아도 돼요</b></p>
+        <ol className="ws-ladder" aria-label={`홍수 위기 단계 ${LVL.slice(1).map(l => l[0]).join(' · ')} 가운데, 지금은 ${LVL[0][0]}이에요(관심 아래)`}>
+          {LVL.slice(1).map(([n, c]) => <li key={n}><i style={{ background: c }} /><span>{n}</span></li>)}
+        </ol>
+        {/* 사다리 위의 표 하나: 걸음이 느리면 나서는 단계(앱 decide()의 규칙과 같다 — 한 단계 일찍 = '주의') */}
+        {!GAITS[G].stairs && <p className="ws-ladder-note"><Ico name="arrow-up" size={16} stroke={2.4} /><span>{GAITS[G].name}는 여기서 나서요</span></p>}
+        <div className="ws-srcs">
+          <p className="ar-src"><Ico name="clock" size={16} stroke={2} /><span>{MARKET.water.calm} 기준 · 비 시간당 {MARKET.water.rain.calm}mm<ArEx /></span></p>
+          <p className="ar-src"><Ico name="radio-tower" size={16} stroke={2} /><span>출처: 기상청 · 영산강홍수통제소</span></p>
+        </div>
+      </>
+    );
+  }
+
+  // ─ 경보가 오면: decide('aid', 0) = 물이 들기 전 · decide('aid', 물이 종아리에 닿는 때) = 물이 들면
+  function Plan() {
+    return (
+      <>
+        {b0 && <div className="ws-plan-row"><span className="k">물이 들기 전</span><span className="v">{b0.exit ? '입구 밖으로 나가요' : `${ro(placeShort(b0))} 가요`}<small>{b0.exit ? '아치를 지나 골목 밖 · 찻길에서 떨어져' : placeName(b0)}</small></span><span className="m">{b0.dist}<i>m</i></span></div>}
+        {up && up.tall && <div className="ws-plan-row"><span className="k">물이 들면</span><span className="v">{up.short} {up.floors}층<small>가장 가까운 높은 건물 · 높이 {up.h}m</small></span><span className="m">{up.dist}<i>m</i></span></div>}
+        {!GAITS[G].stairs && <p className="ar-note"><Ico name="clock-alert" size={18} stroke={2} /><span><b>{GAITS[G].name}</b>는 한 단계 일찍 — 호우주의보나 강 수위 ‘주의’에서 바로 나서요</span></p>}
+      </>
+    );
+  }
+
+  // ─ 대피 지도: 앱의 TopMap(45m 위 원본 렌더 + 레벨 좌표) + 곁의 글 목록 · 보는 법
+  const words = s => {
+    const out = [];
+    RISK_ORDER.forEach(k => {
+      const list = risks.filter(r => r.kind === k && sev(r) === s);
+      if (!list.length) return;
+      if (k === 'sill') out.push(`가게 턱 ${sillCm()}cm`);
+      else if (k === 'power') list.flatMap(r => (r.label || RISK_KIND.power.label).replace('가게 앞 ', '').split(' · ')).forEach(w => { if (!out.includes(w)) out.push(w); });
+      else out.push(RISK_KIND[k].label);
+    });
+    return out.join(' · ');
+  };
+  const Mark = ({ children }) => <svg viewBox="-20 -20 40 40" aria-hidden="true">{children}</svg>;
+  function MapBlock() {
+    const [sel, setSel] = React.useState(places[0] ? places[0].id : null);
+    const dest = places.find(p => p.id === sel) || places[0];
+    const nRed = risks.filter(r => sev(r) === 'red').length, nAmber = risks.length - nRed;
+    return (
+      <div className="ws-mapgrid">
+        <div className="ws-map">
+          <TopMap view={[470, 150, 660, 1400]} fit="meet" mk={1.25} labels={true} dest={dest} places={places} risks={risks} onPick={p => setSel(p.id)}
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+            title={`1913 송정역시장을 45m 위에서 본 지도. 위가 입구, 아래가 내 가게예요. ${dest ? pname(dest) + '까지 가는 길, ' : ''}안전한 곳 ${places.length}곳, 가는 길에 조심할 곳 ${risks.length}곳을 표시했어요.`} />
+        </div>
+        <div className="ws-mapside">
+          <div className="ws-card">
+            <h3 className="ws-card-h">안전한 곳</h3>
+            <p className="ws-card-sub">물이 들기 전에는 {ro(places[0] ? places[0].num + '번 ' + pname(places[0]) : '입구 밖')}, 물이 들면 가장 가까운 높은 건물 위층으로 가요. 거리는 가게 문에서 걷는 길로 잰 값이에요.</p>
+            <ol className="ws-places">
+              {places.map(s => (
+                <li key={s.id}>
+                  <button type="button" className="ws-place" aria-pressed={!!dest && s.id === dest.id} onClick={() => setSel(s.id)}>
+                    <span className="no" aria-hidden="true">{s.num}</span>
+                    <span className="nm">{pname(s)}<small>{s.exit ? '물이 들기 전 · 골목 밖' : (up && s.id === up.id ? '물이 들면 가장 가까움 · ' : '') + `높이 ${s.h}m`}</small></span>
+                    <span className="d">{s.dist}m</span>
+                  </button>
+                </li>
+              ))}
+            </ol>
+            <p className="ws-sr" aria-live="polite">{dest ? `지도에 ${pname(dest)}까지 가는 길을 그렸어요. 가게 문에서 ${dest.dist}m예요.` : ''}</p>
+          </div>
+          <div className="ws-card">
+            <h3 className="ws-card-h">지도 보는 법</h3>
+            <ul className="ws-legend">
+              <li><Mark><g className="tm-place"><circle r="16" /><path d="M-6 6 V-3 L0 -7 L6 -3 V6 Z" /></g></Mark><div><b>안전한 곳</b><span>입구 밖 · 높은 건물의 문</span></div></li>
+              <li><Mark><g className="tm-risk red"><path d="M0 -15 L14 10 H-14 Z" /><circle r="4.5" cy="2" className="dot" /></g></Mark><div><b>빠짐 · 감전 {nRed}곳</b><span>{words('red')}</span></div></li>
+              <li><Mark><g className="tm-risk"><circle r="13" /><circle r="5" className="dot" /></g></Mark><div><b>걸림 · 미끄럼 {nAmber}곳</b><span>{words('amber')}</span></div></li>
+              <li><Mark><g className="tm-home"><circle r="15" /><path d="M-6 5 V-1 L0 -6 L6 -1 V5 Z" /></g></Mark><div><b>내 가게</b><span>나서는 곳 · 가게 문 앞</span></div></li>
+              <li><Mark><polyline className="tm-route-halo" points="-15,0 15,0" /><polyline className="tm-route" points="-15,0 15,0" /></Mark><div><b>가는 길</b><span>목록에서 고른 곳까지</span></div></li>
+            </ul>
+            <p className="ar-src ws-mapsrc"><Ico name="layers" size={16} stroke={2} /><span>배경데이터 레벨을 45m 위에서 본 원본 렌더 위에, 레벨에서 잰 자리로 그렸어요</span></p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ─ 이 동네의 기록 (최근 것부터) · 대피소 주의
+  const day = s => (String(s).match(/\d+/g) || []).slice(0, 3).reduce((a, v) => a * 100 + Number(v), 0);   // '2025.7.17' · '2025년 7월 17일' 둘 다
+  function Hist() {
+    return (
+      <>
+        <ul className="ws-hist">{LOCAL.hist.slice().sort((a, b) => day(b.dt) - day(a.dt)).map(h => <li key={h.dt} className="hs-row"><span className="dt">{h.dt}</span><span className="tx">{h.tx}</span></li>)}</ul>
+        <p className="ar-note"><Ico name="info" size={18} stroke={2} /><span>시장 골목이 잠겼다는 기록은 없어요. 다만 바닥이 평평해서(높이 차 2cm) 물이 들면 골목 전체가 함께 잠겨요.</span></p>
+        <p className="ar-src"><Ico name="file-text" size={16} stroke={2} /><span>출처: {LOCAL.histSrc}</span></p>
+      </>
+    );
+  }
+  function Shelter() {
+    return (
+      <>
+        <div className="sh-warn">
+          <span className="ic"><Ico name="octagon-alert" size={22} stroke={2} /></span>
+          <span className="tx"><span className="t">근처 민방위 대피소는 모두 지하예요 — 홍수 때는 들어가면 안 돼요</span>
+            <span className="s">{[].concat(LOCAL.shelters).join(' · ')}. 공습에 대비한 곳이라 물이 들면 가장 먼저 잠겨요. 홍수 때는 높은 건물 위층으로 가요.</span></span>
+        </div>
+        <p className="ar-src"><Ico name="file-text" size={16} stroke={2} /><span>출처: 광산구 민방위 대피시설 목록</span></p>
+      </>
+    );
+  }
+
+  const NaruAt = pose => <Naru pose={pose} h="100%" style={{ position: 'static', display: 'block', width: 'auto' }} />;
+  mount('ws-logo-head', <Logo h={22} />);
+  mount('ws-logo-foot', <Logo h={18} />);
+  mount('ws-naru-hero', NaruAt('lantern'));
+  mount('ws-hero-wm', <DropWm w={440} />);                 // 앱의 파란 판 뒤에 있는 옅은 자개 고리, 같은 부품
+  mount('ws-status', <Status />);
+  mount('ws-plan', <Plan />);
+  mount('ws-mapblock', <MapBlock />);
+  mount('ws-gauge', <GaugeCard m={LOCAL.gauge.now} />);
+  mount('ws-hist', <Hist />);
+  mount('ws-shelter', <Shelter />);
+  mount('ws-naru-prac', NaruAt('ruler'));
+
+  // 연습 링크: 늘 연습 모드로 연다(앱은 ?st= 로 상태를 받는다). 길 미리 걷기 · 조심할 곳의 갈 곳 = 물이 들기 전의 갈 곳
+  const dest0 = b0 ? b0.id : 's0';
+  const APP = {
+    eWater: { mode: 'drill', lv: 1, flow: null, step: 0, at: null, from: 'now', wfrom: null },
+    eGuide: { mode: 'drill', dest: dest0, step: 0, lv: 0, flow: null, at: null, from: 'now', rkFocus: null, rkMode: null, walkS: null, walkFrom: null, detourAt: null },
+    eRisk: { mode: 'drill', rk: 'eNow', dest: dest0 },
+  };
+  document.querySelectorAll('a[data-app]').forEach(a => { const k = a.getAttribute('data-app'); if (APP[k]) a.setAttribute('href', 'index.html?screen=' + k + '&st=' + encodeURIComponent(JSON.stringify(APP[k]))); });
+})();
+</script>
+</body>
+</html>

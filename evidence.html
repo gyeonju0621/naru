@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1920">
+<title>NARU · 원본 렌더 ↔ 앱 화면 (원형 유지 증빙)</title>
+<link rel="icon" type="image/png" href="assets/mascot4/m4-avatar.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretendard-gov/1.3.9/static/pretendard-gov-dynamic-subset.min.css">
+<link rel="stylesheet" href="naru-v9.css?v=1795401937">
+<style>
+  /* 앱과 같은 색 · 글자 (KRDS 토큰): 바탕 #F4F5F6 · 흰 카드 · 글자 #1E2124 / #464C53 / #58616A · 굵기 400 / 700 */
+  html,body{margin:0;background:#F4F5F6;font-family:'Pretendard GOV','Pretendard Variable',Pretendard,sans-serif;color:#1E2124;letter-spacing:-.01em;word-break:keep-all}
+  .n9.lt.page{width:1920px;height:1080px;box-sizing:border-box;padding:52px 72px 44px;display:flex;flex-direction:column;position:relative;overflow:hidden;background:#F4F5F6;color:#1E2124}
+  .eyebrow{font-size:17px;font-weight:700;color:#0B50D0}
+  h1{font-size:40px;font-weight:700;letter-spacing:-.02em;margin:6px 0 0;line-height:1.3}
+  .meta{font-size:17px;line-height:1.5;color:#464C53;text-align:right}
+  .row{display:flex;gap:48px;margin-top:26px}
+  .view{position:relative;width:560px;height:520px;border-radius:16px;overflow:hidden;background:#FFFFFF;box-shadow:0 0 0 1px #CDD1D5}
+  .view.two{display:flex;gap:18px;align-items:center;justify-content:center;background:#E6E8EA}
+  .phone{position:relative;width:235px;height:488px;border-radius:29px;overflow:hidden;flex:none;background:#fff;box-shadow:0 0 0 1px #CDD1D5,0 12px 28px rgba(30,33,36,.18)}
+  .phone iframe{display:block;width:470px;height:850px;border:0;transform:scale(.626);transform-origin:0 0;margin:-22px 0 0 -30px;pointer-events:none}
+  .tag{position:absolute;left:16px;top:16px;z-index:6;height:34px;padding:0 14px;border-radius:6px;display:flex;align-items:center;gap:8px;background:#1E2124;color:#fff;font-size:15px;font-weight:700}
+  .tag i{font-style:normal;font-weight:400}
+  .cap{width:560px;margin-top:14px}
+  .cap b{display:block;font-size:19px;font-weight:700}
+  .cap span{display:block;font-size:15px;line-height:1.5;color:#464C53;margin-top:3px}
+  .cap code{font-family:ui-monospace,Consolas,monospace;font-size:13px;color:#58616A}
+  .strip{display:flex;gap:16px;margin-top:22px;align-items:flex-start}
+  .thumb{position:relative;width:292px;height:150px;border-radius:10px;overflow:hidden;background:#E6E8EA;box-shadow:0 0 0 1px #CDD1D5}
+  .thumb .tag{left:10px;top:10px;height:26px;font-size:13px;padding:0 10px;border-radius:4px}
+  .keep{flex:1;min-width:0;padding-left:22px;font-size:15px;line-height:1.6;color:#464C53}
+  .keep b{color:#1E2124;font-weight:700}
+  .empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;font-size:17px;line-height:1.6;color:#58616A}
+  .mark{position:absolute;inset:0;z-index:40;pointer-events:none;display:flex;align-items:center;justify-content:center}
+  .mark span{transform:rotate(-14deg);font-size:92px;font-weight:700;letter-spacing:-.03em;color:rgba(200,60,40,.26);border:8px solid rgba(200,60,40,.26);padding:10px 40px;border-radius:24px;white-space:nowrap}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="src/Kit9.jsx?v=1795401937"></script>
+<script src="assets/pano/list.js?v=1795401937"></script>
+<script src="assets/pano/walk.js?v=1795401937"></script>
+<script type="text/babel" src="src/Pano.jsx?v=1795401937"></script>
+<script src="assets/market/market.js?v=1795401937"></script>
+<script type="text/babel" src="src/Market.jsx?v=1795401937"></script>
+<script type="text/babel" src="src/Lantern.jsx?v=1795401937"></script>
+<script type="text/babel">
+// 원본 렌더 ↔ 앱 화면 한 장 (1920×1080). 렌더가 assets/pano/ 에 있으면 1번과 아래 띠가 저절로 채워진다.
+//   앱의 길 · 물 화면은 이 렌더를 그대로 깔고, 그 위에 길 · 위험 · 거리만 화면의 층으로 겹친다(2번 = 실제 앱을 그대로 끼워 넣은 것).
+//   이 장은 '원본은 그대로, 앱은 잘라 보이기만 하고 레벨에서 잰 자리에 표시를 겹쳤다'는 증빙이다. (11/23: 색 · 글자를 앱과 같게, 2번을 지금의 앱 화면으로)
+//   evidence.html                     보행보조차 · 가게 앞(P03) · 입구로 가는 길
+//   evidence.html?gait=walk&p=P02     걸어서 · 골목 가운데(P02)
+//   evidence.html?pano=test           그려 만든 시험 장면으로 배치만 확인 (제출 금지 표시가 찍힌다)
+
+// 3번: 레벨에서 잰 값 (입구 위, 축척 그대로)
+function Measure({ w = 560, h = 520 }) {
+  const top = 74, bot = h - 70, X = 170, L = MARKET.home.y, Y = y => top + (y / L) * (bot - top);
+  const ink = '#0B50D0', soft = '#B1CEFB';   // 11/23 아침 3 공공 서비스(KRDS) 파랑
+  const pts = [
+    { y: 0, id: 'P01', t: '입구 아치', s: "간판 '태현식품'" },
+    { y: 27.8, id: 'P02', t: '골목 가운데', s: "간판 '송정생고기' · 바닥 맨홀" },
+    { y: L, id: 'P03', t: '안쪽 · 가게 앞', s: '나무 턱' },
+  ];
+  return (
+    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} role="img" aria-label="레벨에서 잰 골목 길이">
+      <rect x={X - 26} y={top - 18} width="52" height={bot - top + 36} rx="10" fill="#E6E8EA" />
+      <line x1={X} y1={top} x2={X} y2={bot} stroke={soft} strokeWidth="3" strokeDasharray="2 8" strokeLinecap="round" />
+      {pts.map(p => <g key={p.id}>
+        <circle cx={X} cy={Y(p.y)} r="11" fill="#FFFFFF" stroke={ink} strokeWidth="3" /><circle cx={X} cy={Y(p.y)} r="4.5" fill="#256EF4" />
+        <text x={X - 40} y={Y(p.y) + 6} textAnchor="end" fontSize="19" fontWeight="700" fill={ink} fontFamily="inherit">{p.id}</text>
+        <text x={X + 34} y={Y(p.y) - 2} fontSize="19" fontWeight="700" fill="#1E2124" fontFamily="inherit">{p.t}</text>
+        <text x={X + 34} y={Y(p.y) + 21} fontSize="15" fontWeight="400" fill="#464C53" fontFamily="inherit">{p.s}</text>
+      </g>)}
+      {/* 치수선 */}
+      {[[0, 27.8], [27.8, L]].map(([a, b]) => <g key={a}>
+        <line x1={w - 160} y1={Y(a) + 8} x2={w - 160} y2={Y(b) - 8} stroke={ink} strokeWidth="1.6" />
+        <path d={`M${w - 166} ${Y(a) + 14}l6 -6 6 6M${w - 166} ${Y(b) - 14}l6 6 6 -6`} fill="none" stroke={ink} strokeWidth="1.6" />
+        <text x={w - 146} y={(Y(a) + Y(b)) / 2 + 7} fontSize="22" fontWeight="700" fill={ink} fontFamily="inherit">{Math.round((b - a) * 10) / 10}m</text>
+      </g>)}
+      <line x1={w - 44} y1={Y(0) + 8} x2={w - 44} y2={Y(L) - 8} stroke="#256EF4" strokeWidth="3" />
+      <text transform={`translate(${w - 24} ${(Y(0) + Y(L)) / 2}) rotate(90)`} textAnchor="middle" fontSize="20" fontWeight="700" fill="#0B50D0" fontFamily="inherit">합 {L}m · 바닥 높이 차 약 2cm</text>
+    </svg>
+  );
+}
+
+// 가게 문(나무 마루 위 W00)에서 입구(P01)까지 걷는 길의 길이 — 앱의 길 안내와 같은 값 (assets/pano/walk.js)
+const walkLenTo = id => {
+  const P = (window.NARU_WALK || {}).points || [], b = P.findIndex(p => p.id === id);
+  if (b < 0) return null;
+  let n = 0; for (let k = 1; k <= b; k++) n += Math.hypot(P[k].x - P[k - 1].x, P[k].y - P[k - 1].y);
+  return n;
+};
+
+function Evidence() {
+  // 전역에 두면 window.name · window.focus 같은 브라우저 기본 속성과 이름이 겹친다. 그래서 전부 함수 안에 둔다
+  const Q = new URLSearchParams(location.search);
+  const gait = GAITS[Q.get('gait')] ? Q.get('gait') : 'aid';
+  const P = MARKET.points.find(p => p.id === Q.get('p')) || MARKET.points[MARKET.points.length - 1];
+  const safe = MARKET.safe.find(s => s.id === Q.get('dest')) || decide(gait, 0).best || MARKET.safe[0];
+  const pano = usePanoReady();
+  const shot = pano ? PANO.pick(P.id, GAITS[gait].eye, 0) : null;                // 그 걸음의 눈높이가 없으면 가장 가까운 눈높이의 장면
+  const eye = shot ? shot.eye : GAITS[gait].eye;
+  const waters = pano ? PANO.waters.filter(w => PANO.has(P.id, w)) : PANO.waters;   // 렌더돼 있는 수위만 보여 준다
+  const file = w => PANO.file(P.id, eye, w);
+  const fname = w => file(w).split('/').pop();
+  const L0 = MARKET.home.y;
+  // 실제 앱을 그대로 끼워 넣는다(시연 상태 고정 · 누를 수 없음)
+  const app = (screen, st, ui) => 'index.html?bare=1&theme=light&screen=' + screen + '&st=' + encodeURIComponent(JSON.stringify(st)) + '&ui=' + encodeURIComponent(JSON.stringify(ui));
+  const none = <div className="empty">렌더를 <br />naru/assets/pano/ 에 넣으면<br />여기에 원본 렌더가 나옵니다.</div>;
+  return (
+    <div className="n9 lt page">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+        <div>
+          <div className="eyebrow">원형 유지 · 원본 렌더 ↔ 앱 화면</div>
+          <h1>원본 렌더는 손대지 않습니다. 앱은 그 위에 길 · 위험 · 거리만 겹칩니다.</h1>
+        </div>
+        <div className="meta">{MARKET.place} · 3D 레벨 (UE 5.2.1)<br />{P.label} 지점 {P.id} · {GAITS[gait].name} 눈높이 {eye}cm</div>
+      </div>
+      <div className="row">
+        <div>
+          <div className="view">{pano ? <PanoView src={file(0)} yaw0={180} pitch0={-4} /> : none}<span className="tag">1<i>원본 렌더</i></span></div>
+          <div className="cap"><b>진흥원 레벨을 그대로 렌더한 장면</b><span>수위 0. 색 · 간판 · 건물에 손대지 않았습니다. 앱은 이 장면을 잘라 보이고, 화면에서만 밝기 · 색을 아주 살짝 맞춥니다(파일은 그대로).</span><code>{fname(0)}</code></div>
+        </div>
+        <div>
+          <div className="view two">
+            <div className="phone"><iframe src={app('eGuide', { alert: 1, mode: 'real', walk: gait, dest: safe.id, onboarded: 1 }, { walkS: 9.5 })} title="앱의 길 안내 화면" tabIndex={-1} /></div>
+            <div className="phone"><iframe src={app('eMap', { alert: 0, mode: 'real', walk: gait, onboarded: 1 }, {})} title="앱의 지도 화면" tabIndex={-1} /></div>
+            <span className="tag">2<i>앱 화면</i></span>
+          </div>
+          <div className="cap"><b>같은 렌더 위에, 화면의 층으로 겹친 길 · 위험 · 거리</b><span>왼쪽은 1m마다 렌더한 장면을 걷는 길 안내, 오른쪽은 45m 위에서 본 렌더로 만든 지도입니다. 렌더 파일은 고치지 않았고, 초록 길과 위험 표시는 레벨에서 잰 자리에 그린 것입니다.</span><code>앱을 그대로 끼워 넣은 화면 · index.html</code></div>
+        </div>
+        <div>
+          <div className="view"><Measure /><span className="tag">3<i>레벨에서 잰 값</i></span></div>
+          <div className="cap"><b>이 값이 표시의 자리와 대피 판단을 정합니다</b><span>지점 사이 {L0}m(P03 → P01), 가게 문에서 입구 밖까지 걷는 길 {walkLenTo('P01') != null ? Math.round(walkLenTo('P01')) : '-'}m. 바닥이 평평해 골목이 같이 잠기므로, 피할 곳은 옆이 아니라 밖(입구 밖)이나 위(레벨에서 높이를 잰 건물)입니다.</span><code>건물 높이 · 문 자리는 레벨 액터에서 잼 · 층수는 예시</code></div>
+        </div>
+      </div>
+      <div className="strip">
+        {waters.map(w => (
+          <div key={w} className="thumb">{pano ? <PanoView src={file(w)} yaw0={180} pitch0={-10} vfov={70} /> : null}<span className="tag">{w ? `수위 ${w}cm` : '수위 0 · 원본'}</span></div>
+        ))}
+        <div className="keep">
+          <b>지킨 것</b> 원본 파일 1,394개가 처음 기록(SHA-256)과 같습니다. 레벨 파일은 저장하지 않았고, 생성형 AI로 배경을 만들거나 바꾸지 않았습니다. 렌더 파일도 그대로입니다.<br />
+          <b>더한 것</b> 렌더용 엔진 플러그인 4개(.uproject), 렌더할 때만 레벨에 넣는 수면 한 장과 그 흙탕물 재질(Content\Naru), 직접 걸어 보기용 렌더 카메라 자리 65곳(그중 18곳은 수위 셋의 물 찬 장면도)과 위에서 내려다본 자리(설정 파일 points.json, 레벨 밖). 앱 화면의 밝기 · 색 보정은 아주 살짝, 화면에서만.
+        </div>
+      </div>
+      {PANO.test && <div className="mark"><span>시험 장면 · 제출 금지</span></div>}
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<Evidence />);
+</script>
+</body>
+</html>

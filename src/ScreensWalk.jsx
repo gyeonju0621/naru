@@ -296,7 +296,7 @@ function EGuide({ go, st, set, night, ui = {}, pop, toast }) {
   const walkProp = React.useMemo(() => (plan && len >= .5 ? { from: plan.from, to: plan.to, w: ww } : null), [plan, ww, len]);
   const doneLabel = drill ? '다 걸었어요' : out ? '역에 도착했어요' : tall ? '건물에 들어왔어요' : '안전한 곳에 왔어요';
   if (!kico && ksev) kico = ksev === 'red' ? 'triangle-alert' : 'circle-alert';
-  const voice = st.voice !== false;
+  const voice = st.voice === true;   // 자동으로 읽기는 켠 사람에게만
   // 소리로 읽기(내 정보에서 켠 경우): 걷는 동안 문장이 바뀌면 읽는다 — 두 손이 보행보조차에 있어도 들리게
   React.useEffect(() => { if (voice && !ui.still && (play || arrived)) naruSay(title); }, [title, play, arrived]);
   const [bandH, mark, scrH] = useBandH(198);
@@ -305,7 +305,7 @@ function EGuide({ go, st, set, night, ui = {}, pop, toast }) {
       {mark}
       <WScene walk={walkProp} p={plan && len < .5 ? plan.from : 'P03'} eye={eye} ctl={ctl} route={R} hazards={marks} pins={pins} emph={emph}
         yaw0={S0.current.yaw} pitch0={S0.current.pitch} startS={S0.current.s} speed={1.25} hold={!!ui.hold} padTop={bandH + 28} padBottom={156} onProgress={onProgress} onArrive={onArrive} label="1913 송정역시장 골목을 걸어 보는 장면" />
-      <Band tone={real ? 'real' : 'brand'} over round slim left={<><ArBack on onClick={back} />{drill ? <PracChip on /> : <RealChip on />}</>} right={voice ? <Replay on text={title} toast={toast} /> : null}>
+      <Band tone={real ? 'real' : 'brand'} over round slim left={<><ArBack on onClick={back} />{drill ? <PracChip on /> : <RealChip on />}</>} right={<Replay on text={title} toast={toast} />}>
         <div className="ar-in" key={arrived ? 'a' : cur ? cur.id : 'g'} aria-live="assertive">
           <p className={'wv-kick ' + (ksev || (kico ? 'ok' : 'plain'))}>{kico ? <Ico name={kico} size={19} stroke={2.4} /> : null}<span>{kick}</span></p>
           <h1 className="ar-h2">{title}</h1>

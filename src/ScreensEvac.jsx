@@ -71,7 +71,7 @@ function ENow({ go, st, set, night, ui = {}, pop, toast }) {
   React.useEffect(() => {
     if (!realNow || ui.still || st.alertSaid) return;
     set({ alertSaid: 1 });
-    if (st.voice !== false) naruSay(alertSpeech(st));
+    if (st.voice === true) naruSay(alertSpeech(st));   // 소리는 내 정보에서 켠 사람에게만(처음엔 꺼짐)
     if (st.buzz === false) return;
     try { if (navigator.vibrate && (!navigator.userActivation || navigator.userActivation.hasBeenActive)) navigator.vibrate([400, 200, 400]); } catch (e) { }
     setFlash(true); const t = setTimeout(() => setFlash(false), 2600); return () => clearTimeout(t);
@@ -90,7 +90,7 @@ function ENow({ go, st, set, night, ui = {}, pop, toast }) {
     return (
       <>
         <AlertScene safe={b} g={g} w={Math.round(lvl * 100)} />
-        <Band over round left={<><ArBack on icon="x" label="연습 닫기" onClick={quit} /><PracChip on /></>} right={st.voice !== false ? <Replay on text={alertSpeech(st)} toast={toast} /> : null}>
+        <Band over round left={<><ArBack on icon="x" label="연습 닫기" onClick={quit} /><PracChip on /></>} right={<Replay on text={alertSpeech(st)} toast={toast} />}>
           <div className="ar-in">
             <h1 className="ar-h1">{title}</h1>
             <p className="ar-b2">{sub}</p>
@@ -118,7 +118,7 @@ function ENow({ go, st, set, night, ui = {}, pop, toast }) {
     const toUp = () => { set({ dest: u.id, walkFrom: 'P01', walkS: null, arrived: null, from: 'wait', waitAt: at.id, rkFocus: null, rkMode: null, detourAt: null, detourFrom: null }); go('eGuide'); };
     return (
       <Page>
-        <Band tone="real" round left={<RealChip on />} right={st.voice !== false ? <Replay on text={u ? `${say1}. 물이 들면 ${u.short} ${u.floors}층으로 가세요. ${u.dist}미터.` : say1} toast={toast} /> : null}>
+        <Band tone="real" round left={<RealChip on />} right={<Replay on text={u ? `${say1}. 물이 들면 ${u.short} ${u.floors}층으로 가세요. ${u.dist}미터.` : say1} toast={toast} />}>
           <div className="ar-in">
             <p className="ar-c">{at ? placeName(at) : '안전한 곳에 있어요'}</p>
             <h1 className="ar-h1">{u ? <>찻길에서 떨어져 <b>기다리세요</b></> : <>물이 빠질 때까지 <b>여기</b> 계세요</>}</h1>
@@ -137,7 +137,7 @@ function ENow({ go, st, set, night, ui = {}, pop, toast }) {
   return (
     <>
       <AlertScene safe={b} g={g} />
-      <Band tone="real" over round className={flash ? 'flash' : ''} left={<RealChip on />} right={st.voice !== false ? <Replay on text={alertSpeech(st)} toast={toast} /> : null}>
+      <Band tone="real" over round className={flash ? 'flash' : ''} left={<RealChip on />} right={<Replay on text={alertSpeech(st)} toast={toast} />}>
         <div className="ar-in" role="alert">
           <p className="ar-c al-src"><Ico name="megaphone" size={16} stroke={2.2} /><span><span className="nw">기상청 호우경보 ·</span> <span className="nw">{LOCAL.dong} · {T.alert}<ArEx /></span></span></p>
           <h1 className="ar-h1">{title}</h1>
@@ -222,7 +222,7 @@ function EArrive({ go, st, set, night, toast }) {
   );
   return (
     <Page>
-      <Band tone="real" round left={<RealChip on />} right={st.voice !== false ? <Replay on text={sign.v} toast={toast} /> : null}>
+      <Band tone="real" round left={<RealChip on />} right={<Replay on text={sign.v} toast={toast} />}>
         <div className="ar-in">
           <p className="ar-c">도착했어요 · {safe.tall ? safe.short : placeName(safe)}</p>
           <h1 className="ar-h1">{sign.t}</h1>
@@ -321,7 +321,7 @@ function EPlan({ go, st, set, night, ui = {}, pop, toast }) {
 
         <h2 className="ar-sec">이렇게 알려요</h2>
         <div className="ar-card list">
-          {row('volume-2', '소리로 읽기', '경보와 길 안내를 소리로 읽어 드려요', 'voice')}
+          {row('volume-2', '소리로 읽기', '경보와 길 안내를 소리로 읽어 드려요', 'voice', false)}
           {row('vibrate', '진동과 빛', '경보를 소리 없이도 알 수 있어요', 'buzz')}
           <SwitchRow icon="bell" title="날씨 · 연습 · 안내 알림" sub="비 소식과 연습 때를 알려요" on={T('tell', edu)} onClick={() => { const v = !T('tell', edu); set({ tell: v, terms: { ...(st.terms || {}), edu: v } }); }} />
         </div>

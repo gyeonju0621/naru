@@ -253,3 +253,18 @@ body{margin:0;background:#F4F5F6}
   /* 큰 글자에서는 장식(나루)을 접고 글에 폭을 준다. 머리말의 표는 '시제품'만 */
   html[data-fs] #ws .ws-hero-naru,html[data-fs] #ws .ws-prac-naru,html[data-fs] #ws .ws-proto-a{display:none}
 }
+/* 배경데이터를 먼저 (11/23): 첫 화면의 원본 렌더 한 장 + 바로 밑 구역의 렌더 세 장 */
+#ws .ws-hero-shot{flex:none;width:400px;margin:0;position:relative;z-index:1}
+#ws .ws-hero-shot img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:50% 52%;border-radius:12px;box-shadow:0 0 0 3px rgba(255,255,255,.92)}
+#ws .ws-hero-shot figcaption{margin-top:10px;font-size:var(--f15);line-height:1.47;font-weight:700}
+#ws .ws-hero-shot+.ws-hero-naru{height:150px;margin-left:-70px;margin-right:0;align-self:flex-end;position:relative;z-index:2}
+#ws .ws-shots{display:grid;gap:var(--gut);margin-top:32px;grid-template-columns:repeat(3,minmax(0,1fr))}
+#ws .ws-shots figure{margin:0}
+#ws .ws-shots img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:50% 52%;border-radius:12px;background:var(--fill)}
+#ws .ws-shots figcaption{margin-top:10px;font-size:var(--f17);line-height:1.5;color:var(--ink2)}
+#ws .ws-shots figcaption b{color:var(--ink)}
+@media (max-width:1023px){#ws .ws-hero-shot{width:300px}#ws .ws-hero-shot+.ws-hero-naru{display:none}}
+@media (max-width:767px){#ws .ws-hero-top{flex-wrap:wrap}#ws .ws-hero-shot{width:100%;order:3;margin-top:8px}#ws .ws-shots{grid-template-columns:minmax(0,1fr)}#ws .ws-shots img{aspect-ratio:16/9}}
+#ws .ws-pz{display:block;overflow:hidden;border-radius:12px;aspect-ratio:4/3}
+#ws .ws-shots .ws-pz img{height:100%;aspect-ratio:auto;border-radius:0;transform:scale(1.7);transform-origin:50% 54%}   /* 360° 렌더의 가운데(덜 굽은 곳)만 */
+@media (max-width:767px){#ws .ws-pz{aspect-ratio:16/9}}

@@ -15,8 +15,8 @@
     try { var f = localStorage.getItem('naru-web-fs'); if (f === 'l' || f === 'xl') d.setAttribute('data-fs', f); } catch (e) {} })();
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretendard-gov/1.3.9/static/pretendard-gov-dynamic-subset.min.css">
-<link rel="stylesheet" href="naru-ar.css?v=1795404190">
-<link rel="stylesheet" href="web/site.css?v=1795404190">
+<link rel="stylesheet" href="naru-ar.css?v=1795405625">
+<link rel="stylesheet" href="web/site.css?v=1795405625">
 </head>
 <body>
 <div class="n9 ar site" id="ws">
@@ -56,10 +56,10 @@
       <nav class="ws-nav" id="ws-nav" aria-label="주 메뉴">
         <ul>
           <li><a href="web/#now">지금 상황</a></li>
+          <li><a href="web/#data">배경데이터</a></li>
           <li><a href="web/#map">대피 지도</a></li>
           <li><a href="web/#guide">행동요령</a></li>
           <li><a href="web/#practice">미리 연습</a></li>
-          <li><a href="web/#about">서비스 소개</a></li>
           <li class="ws-nav-cta"><a class="ws-btn pri" href="index.html">앱으로 연습하기</a></li>
         </ul>
       </nav>
@@ -94,6 +94,10 @@
             <h1 id="ws-h1">1913 송정역시장 침수 대피 안내</h1>
             <p class="ws-hero-sub">물이 오기 전에, 안전한 곳으로</p>
           </div>
+          <figure class="ws-hero-shot">
+            <img src="assets/scene/alley.jpg" alt="1913 송정역시장 골목을 배경데이터 그대로 렌더한 장면">
+            <figcaption>배경데이터 원본 렌더 · 1913 송정역시장 골목</figcaption>
+          </figure>
           <div class="ws-hero-naru" id="ws-naru-hero" aria-hidden="true"></div>
         </div>
       </div>
@@ -108,6 +112,38 @@
           <div id="ws-plan" class="ws-plan"><p class="ws-wait">갈 곳을 계산하고 있어요…</p></div>
           <a class="ws-more" href="web/#map">대피 지도에서 길 보기<i data-lucide="chevron-right" width="18" height="18" stroke-width="2.2" aria-hidden="true"></i></a>
         </article>
+      </div>
+    </section>
+
+    <!-- 이유 (9, 위로 옮김 11/23): 이 안내는 공모전에서 받은 3D 배경데이터로 만들었다 — 첫 화면 바로 밑에서 그것부터 보여 준다(평가 1 배경데이터 활용 · 원형 유지).
+         같은 자리의 원본 렌더 · 물 높이 렌더 · 위에서 본 렌더 세 장, 그리고 무엇을 바꾸지 않았는지 세 줄. 증빙 쪽으로 잇는다. -->
+    <section class="ws-sec" id="data" aria-labelledby="ws-data-h">
+      <div class="ws-wrap">
+        <h2 class="ws-sec-h" id="ws-data-h">배경데이터로 만든 대피 길</h2>
+        <p class="ws-lead">1913 송정역시장의 3D 배경데이터(언리얼 레벨)를 바꾸지 않고 그대로 렌더했어요. 화면의 골목 · 지도 · 물 높이가 모두 이 렌더이고, 거리와 높이는 레벨에서 쟀어요.</p>
+        <div class="ws-shots">
+          <figure><span class="ws-pz"><img src="assets/pano/lo/songjeong_P03_eye140_w000.jpg" alt="가게 앞에서 본 골목 원본 렌더" loading="lazy" width="1024" height="512"></span><figcaption><b>원본 렌더</b> · 가게 앞, 눈높이 140cm</figcaption></figure>
+          <figure><span class="ws-pz"><img src="assets/pano/lo/songjeong_P03_eye140_w050.jpg" alt="같은 자리 물 높이 50cm 렌더" loading="lazy" width="1024" height="512"></span><figcaption><b>물 높이 50cm</b> · 같은 자리, 렌더할 때만 넣은 수면</figcaption></figure>
+          <figure><img src="assets/map/top45.jpg" alt="45m 위에서 내려다본 원본 렌더" loading="lazy"><figcaption><b>45m 위에서</b> · 대피 지도의 바탕</figcaption></figure>
+        </div>
+        <div class="ws-row3">
+          <article class="ws-card ws-point">
+            <span class="ws-ic"><i data-lucide="shield-check" width="24" height="24" stroke-width="2" aria-hidden="true"></i></span>
+            <h3>배경데이터 그대로</h3>
+            <p>원본 파일 1,394개의 해시가 처음과 같아요. 레벨은 읽기만 하고 고치지 않았어요.</p>
+          </article>
+          <article class="ws-card ws-point">
+            <span class="ws-ic"><i data-lucide="ruler" width="24" height="24" stroke-width="2" aria-hidden="true"></i></span>
+            <h3>레벨에서 잰 거리 · 높이</h3>
+            <p>골목 길이, 건물 높이, 문과 위험물의 자리는 레벨에서 잰 값이에요. 재지 않은 값에는 ‘예시’를 붙였어요.</p>
+          </article>
+          <article class="ws-card ws-point">
+            <span class="ws-ic"><i data-lucide="layers" width="24" height="24" stroke-width="2" aria-hidden="true"></i></span>
+            <h3>렌더 위에는 길 · 위험 · 거리만</h3>
+            <p>원본 렌더 파일은 손대지 않고, 그 위에 가는 길과 위험 표시, 거리만 얹었어요.</p>
+          </article>
+        </div>
+        <p class="ws-about-link"><a class="ws-btn sec" href="evidence.html">원본과 결과물 나란히 보기<i data-lucide="arrow-right" width="18" height="18" stroke-width="2.2" aria-hidden="true"></i></a></p>
       </div>
     </section>
 
@@ -230,32 +266,6 @@
       </div>
     </section>
 
-    <!-- 이유 (9): 공모전 평가(배경데이터 활용 · 원형 유지)와 믿음 — 무엇을 바꾸지 않았고 무엇을 더했는지 세 줄로 밝히고, 증빙 쪽으로 잇는다.
-         '예시' 표시의 뜻(재지 않은 값)도 여기서 한 번 설명한다. -->
-    <section class="ws-sec" id="about" aria-labelledby="ws-about-h">
-      <div class="ws-wrap">
-        <h2 class="ws-sec-h" id="ws-about-h">서비스 소개 · 배경데이터</h2>
-        <p class="ws-lead">나루는 1913 송정역시장 한 곳을 위한 침수 대피 안내예요. 보행보조차를 쓰는 78세 상인도 물이 오기 전에 안전한 곳에 닿도록, 3D 배경데이터(언리얼 레벨)에서 길과 위험을 찾았어요.</p>
-        <div class="ws-row3">
-          <article class="ws-card ws-point">
-            <span class="ws-ic"><i data-lucide="shield-check" width="24" height="24" stroke-width="2" aria-hidden="true"></i></span>
-            <h3>배경데이터 그대로</h3>
-            <p>원본 파일 1,394개의 해시가 처음과 같아요. 레벨은 읽기만 하고 고치지 않았어요.</p>
-          </article>
-          <article class="ws-card ws-point">
-            <span class="ws-ic"><i data-lucide="ruler" width="24" height="24" stroke-width="2" aria-hidden="true"></i></span>
-            <h3>레벨에서 잰 거리 · 높이</h3>
-            <p>골목 길이, 건물 높이, 문과 위험물의 자리는 레벨에서 잰 값이에요. 걷는 빠르기처럼 재지 않은 값에는 ‘예시’를 붙였어요.</p>
-          </article>
-          <article class="ws-card ws-point">
-            <span class="ws-ic"><i data-lucide="layers" width="24" height="24" stroke-width="2" aria-hidden="true"></i></span>
-            <h3>렌더 위에는 길 · 위험 · 거리만</h3>
-            <p>원본 렌더 파일은 손대지 않고, 그 위에 가는 길과 위험 표시, 거리만 얹었어요.</p>
-          </article>
-        </div>
-        <p class="ws-about-link"><a class="ws-btn sec" href="evidence.html">원형 유지 증빙 보기<i data-lucide="arrow-right" width="18" height="18" stroke-width="2.2" aria-hidden="true"></i></a></p>
-      </div>
-    </section>
 
   </main>
 
@@ -334,21 +344,21 @@
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <!-- 앱과 같은 부품 · 같은 순서 (../index.html 과 같다) -->
-<script type="text/babel" src="src/Kit9.jsx?v=1795404190"></script>
-<script src="assets/pano/list.js?v=1795404190"></script>
-<script src="assets/pano/walk.js?v=1795404190"></script>
-<script type="text/babel" src="src/Pano.jsx?v=1795404190"></script>
-<script src="assets/market/market.js?v=1795404190"></script>
-<script src="assets/market/risks3d.js?v=1795404190"></script>
-<script type="text/babel" src="src/Picto.jsx?v=1795404190"></script>
-<script type="text/babel" src="src/Market.jsx?v=1795404190"></script>
-<script type="text/babel" src="src/Lantern.jsx?v=1795404190"></script>
-<script type="text/babel" src="src/Ar.jsx?v=1795404190"></script>
-<script type="text/babel" src="src/World.jsx?v=1795404190"></script>
-<script type="text/babel" src="src/ScreensEvac.jsx?v=1795404190"></script>
-<script type="text/babel" src="src/ScreensWalk.jsx?v=1795404190"></script>
-<script type="text/babel" src="src/TopMap.jsx?v=1795404190"></script>
-<script type="text/babel" src="src/ScreensMain.jsx?v=1795404190"></script>
+<script type="text/babel" src="src/Kit9.jsx?v=1795405625"></script>
+<script src="assets/pano/list.js?v=1795405625"></script>
+<script src="assets/pano/walk.js?v=1795405625"></script>
+<script type="text/babel" src="src/Pano.jsx?v=1795405625"></script>
+<script src="assets/market/market.js?v=1795405625"></script>
+<script src="assets/market/risks3d.js?v=1795405625"></script>
+<script type="text/babel" src="src/Picto.jsx?v=1795405625"></script>
+<script type="text/babel" src="src/Market.jsx?v=1795405625"></script>
+<script type="text/babel" src="src/Lantern.jsx?v=1795405625"></script>
+<script type="text/babel" src="src/Ar.jsx?v=1795405625"></script>
+<script type="text/babel" src="src/World.jsx?v=1795405625"></script>
+<script type="text/babel" src="src/ScreensEvac.jsx?v=1795405625"></script>
+<script type="text/babel" src="src/ScreensWalk.jsx?v=1795405625"></script>
+<script type="text/babel" src="src/TopMap.jsx?v=1795405625"></script>
+<script type="text/babel" src="src/ScreensMain.jsx?v=1795405625"></script>
 <script type="text/babel">
 // 나루 웹 · 앱의 부품(Logo · Naru · TopMap · GaugeCard · Ico · ArEx)과 값(decide · MARKET · LOCAL · LVL · GAITS)을 그대로 쓰는 섬들.
 // 쪽의 글은 처음부터 HTML에 있고, 값이 필요한 곳만 여기서 그린다. 앱의 전역 이름과 부딪히지 않게 한 덩어리 안에 둔다.

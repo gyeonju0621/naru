@@ -151,7 +151,7 @@ function EHome({ go, st, set, night, ui = {}, pop }) {
             <button className="red" onClick={() => pop && pop({ k: 'call', n: '119' })}><b>119</b><span>구조 · 구급 · 화재</span></button>
             <button onClick={() => pop && pop({ k: 'call', n: '112' })}><b>112</b><span>경찰</span></button>
           </div>
-          <p className="hm-foot">나루는 공모전 시제품이에요. 정부의 공식 서비스가 아니에요. '예시'가 붙은 값은 실제 상황이 아니에요.</p>
+          <p className="hm-foot">나루는 정부의 공식 서비스가 아니에요. '예시'가 붙은 값은 실제 상황이 아니에요.</p>
         </div>
       </Body>
       <ArNav go={go} cur="eNow" set={set} />

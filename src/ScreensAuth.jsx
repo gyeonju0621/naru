@@ -26,7 +26,7 @@ const AuHead = ({ title, sub }) => (
     {sub && <p className="ar-b">{sub}</p>}
   </div>
 );
-const Demo = ({ children = '시제품이라 실제로 보내거나 확인하지 않아요' }) => <p className="au-demo"><Ico name="info" size={15} stroke={2} /><span>{children}</span></p>;
+const Demo = ({ children = '시연 화면이라 실제로 보내거나 확인하지 않아요' }) => <p className="au-demo"><Ico name="info" size={15} stroke={2} /><span>{children}</span></p>;
 
 // ─ 1. 앱 접근 권한 안내 (처음 한 번)
 const PERMS = [
@@ -75,7 +75,7 @@ function EWelcome({ go, set }) {
           <button className="ar-btn sec" onClick={() => pick('phone')}><Ico name="smartphone" size={20} stroke={2} />휴대폰 번호</button>
           <button className="ar-btn sec" onClick={() => pick('simple')}><Ico name="shield-check" size={20} stroke={2} />인증서</button>
         </div>
-        <Demo>시제품이라 실제 로그인은 하지 않아요</Demo>
+        <Demo>시연 화면이라 실제 로그인은 하지 않아요</Demo>
       </Foot>
     </Page>
   );
@@ -84,7 +84,7 @@ function EWelcome({ go, set }) {
 // ─ 3. 약관 동의: 전체 동의 · 필수 셋 · 선택 하나 (무엇을 모으는지 줄마다)
 const TERMS = [
   { k: 'svc', need: true, t: '서비스 이용약관', s: '나루를 쓰는 데 필요한 약속',
-    body: [['무엇을 하는 서비스인가요?', '나루는 1913 송정역시장 골목의 호우 · 홍수 대피를 돕는 시제품이에요. 경보가 오면 가장 가까운 안전한 곳과 가는 길을 알려 드리고, 평소에는 그 길을 미리 걸어 볼 수 있어요.'],
+    body: [['무엇을 하는 서비스인가요?', '나루는 1913 송정역시장 골목의 호우 · 홍수 대피를 돕는 앱이에요. 경보가 오면 가장 가까운 안전한 곳과 가는 길을 알려 드리고, 평소에는 그 길을 미리 걸어 볼 수 있어요.'],
       ['꼭 알아 두세요', '나루는 정부의 공식 서비스가 아니에요. 실제 재난 때는 재난문자와 119의 안내를 먼저 따르세요. 화면에 \'예시\'가 붙은 값은 실제 상황이 아니에요.'],
       ['그만 쓰고 싶을 때', '내 정보에서 언제든 처음 상태로 되돌릴 수 있어요. 되돌리면 이 휴대폰에 저장한 내 대피 카드가 지워져요.']] },
   { k: 'pi', need: true, t: '개인정보 수집 · 이용', s: '걸음 · 글자 크기 · 자주 있는 곳, 로그인하면 이름 · 휴대폰 번호',
@@ -142,7 +142,7 @@ function EVerify({ go, st, set, ui = {}, toast }) {
     if (blank) { setTel('010 0000 0000'); if (!name.trim()) setName('박순례'); }
     else if (!telOk) return toast && toast('휴대폰 번호를 다시 확인해 주세요');
     setSent(true); setSec(179); if (!code) setTimeout(() => setCode('123456'), 900);
-    toast && toast(blank ? '시제품이라 이름 · 번호 · 인증번호를 채워 드렸어요' : '시제품이라 인증번호를 채워 드렸어요');
+    toast && toast(blank ? '시연 화면이라 이름 · 번호 · 인증번호를 채워 드렸어요' : '시연 화면이라 인증번호를 채워 드렸어요');
   };
   // 내 정보에서 '로그인하기'로 왔으면(relog) 처음 설정을 다시 밟지 않고 내 정보로 돌아간다
   const relog = !!st.relog;
@@ -155,7 +155,7 @@ function EVerify({ go, st, set, ui = {}, toast }) {
       <Body>
         {simple ? <>
           <div className="au-grid">{CERTS.map(([n, ic]) => <button key={n} className="au-tile" onClick={next}><span className="ic"><Ico name={ic} size={24} stroke={2} /></span>{n}</button>)}</div>
-          <Demo>시제품이라 실제 인증 화면으로 넘어가지 않아요. 고르면 확인된 것으로 보고 넘어가요.</Demo>
+          <Demo>시연 화면이라 실제 인증 화면으로 넘어가지 않아요. 고르면 확인된 것으로 보고 넘어가요.</Demo>
         </> : <>
           <label className="au-field"><span className="lb">이름</span><input placeholder="이름을 입력해 주세요" autoComplete="name" value={name} onChange={e => setName(e.target.value)} /></label>
           <label className="au-field"><span className="lb">휴대폰 번호</span>

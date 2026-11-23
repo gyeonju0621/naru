@@ -1,7 +1,7 @@
 {
   "name": "나루 NARU",
   "short_name": "나루",
-  "description": "1913 송정역시장 호우 대피 길잡이 (시제품)",
+  "description": "1913 송정역시장 호우 대피 길잡이",
   "lang": "ko",
   "start_url": "./index.html",
   "scope": "./",

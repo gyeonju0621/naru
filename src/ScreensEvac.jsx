@@ -335,7 +335,7 @@ function EPlan({ go, st, set, night, ui = {}, pop, toast }) {
           {logged ? <LinkRow title="로그아웃" onClick={() => { set({ loggedIn: 0, auth: 'guest' }); toast && toast('로그아웃했어요'); }} />
             : <LinkRow title="로그인하고 내 대피 카드 저장" onClick={() => { set({ auth: 'phone', relog: 1 }); go('eVerify'); }} />}
           <LinkRow title="약관 · 개인정보" onClick={() => pop && pop({ k: 'terms', id: 'svc', all: 1 })} />
-          <LinkRow title="나루 소개" value="시제품 0.9" onClick={() => pop && pop({ k: 'about' })} />
+          <LinkRow title="나루 소개" value="버전 0.9" onClick={() => pop && pop({ k: 'about' })} />
           <LinkRow title="처음 설정 다시 하기" onClick={() => pop && pop({ k: 'reset' })} />
         </div>
       </div>

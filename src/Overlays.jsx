@@ -17,7 +17,7 @@ function Overlay({ ov, close, toast, st, reset }) {
     const n = ov.n || '119';
     return (
       <Sheet title={`${n}에 전화할까요?${P}`} onClose={close}
-        foot={<><button className="ar-btn sec" onClick={close}>취소</button><button className={'ar-btn' + (real && n === '119' ? ' call' : '')} onClick={() => { close(); toast('시제품이라 실제로 전화를 걸지 않아요'); }}><Ico name="phone" size={20} stroke={2.2} />전화 걸기</button></>}>
+        foot={<><button className="ar-btn sec" onClick={close}>취소</button><button className={'ar-btn' + (real && n === '119' ? ' call' : '')} onClick={() => { close(); toast('시연 화면이라 실제로 전화를 걸지 않아요'); }}><Ico name="phone" size={20} stroke={2.2} />전화 걸기</button></>}>
         <p>{n === '119' ? '구조 · 구급 · 화재 신고예요.' : '경찰 신고예요.'}<br />{real ? '연결되면 지금 있는 곳을 이렇게 말하세요.' : '연결되면 지금 있는 곳을 이렇게 말해요.'}</p>
         <div className="where" style={{ marginTop: 12 }}><Ico name="map-pin" size={20} stroke={2.2} /><span>{lines.map(l => <b key={l}>{l}</b>)}{aid ? <span className="ln">{aid}</span> : null}</span></div>
       </Sheet>
@@ -26,7 +26,7 @@ function Overlay({ ov, close, toast, st, reset }) {
   if (ov.k === 'sms') {
     return (
       <Sheet title={`문자로 119에 신고할까요?${P}`} onClose={close}
-        foot={<><button className="ar-btn sec" onClick={close}>취소</button><button className={'ar-btn' + (real ? ' call' : '')} onClick={() => { close(); toast('시제품이라 실제로 문자를 보내지 않아요'); }}><Ico name="send" size={20} stroke={2.2} />문자 보내기</button></>}>
+        foot={<><button className="ar-btn sec" onClick={close}>취소</button><button className={'ar-btn' + (real ? ' call' : '')} onClick={() => { close(); toast('시연 화면이라 실제로 문자를 보내지 않아요'); }}><Ico name="send" size={20} stroke={2.2} />문자 보내기</button></>}>
         <p>{real ? '말하기 어려울 때 쓰세요.' : '말하기 어려울 때 써요.'} 아래 글이 119로 가요.</p>
         <div className="where" style={{ marginTop: 12 }}><Ico name="message-square" size={20} stroke={2.2} /><span><b>도움이 필요해요</b><span className="ln">위치: 광주 {LOCAL.dong}</span>{lines.map(l => <span key={l} className="ln">{l}</span>)}{aid ? <span className="ln">{aid}.</span> : null}</span></div>
       </Sheet>
@@ -40,7 +40,7 @@ function Overlay({ ov, close, toast, st, reset }) {
           {ov.all && <h3 style={{ color: 'var(--brand-ink)' }}>{t.need ? '필수' : '선택'} · {t.t}</h3>}
           {t.body.map(([h, p]) => <React.Fragment key={h}><h3>{h}</h3><p>{p}</p></React.Fragment>)}
         </React.Fragment>)}
-        <p className="au-demo"><Ico name="info" size={15} stroke={2} /><span>시제품용 요약이에요. 실제 약관 전문이 아니에요.</span></p>
+        <p className="au-demo"><Ico name="info" size={15} stroke={2} /><span>요약이에요. 실제 약관 전문이 아니에요.</span></p>
       </Sheet>
     );
   }
@@ -48,13 +48,13 @@ function Overlay({ ov, close, toast, st, reset }) {
     return (
       <Sheet title="나루 소개" onClose={close} foot={<button className="ar-btn" onClick={close}>확인</button>}>
         <h3>무엇인가요</h3>
-        <p>1913 송정역시장 골목의 호우 · 홍수 대피를 돕는 시제품이에요. 배경데이터 공모전에 내려고 만들었어요.</p>
+        <p>1913 송정역시장 골목의 호우 · 홍수 대피를 돕는 앱이에요.</p>
         <h3>골목 장면</h3>
         <p>공모전에서 받은 <span className="nw">시장 3D 자료(배경데이터)를</span> 고치지 않고 그대로 찍은 그림이에요. <span className="nw">길 · 조심할 곳 · 거리는</span> 그 자료에서 잰 자리에 그렸어요.</p>
         <h3>화면과 자료</h3>
         <p>화면은 정부 누리집의 디자인 기준(KRDS)을 따랐어요. 정부의 공식 서비스는 아니에요. 기준과 기록은 영산강홍수통제소, 기상청, 광산구, 행정안전부 국민행동요령에서 가져왔어요.</p>
         <h3>버전</h3>
-        <p>시제품 0.9 · 언리얼 엔진 5.2.1로 찍었어요.</p>
+        <p>버전 0.9 · 언리얼 엔진 5.2.1로 찍었어요.</p>
       </Sheet>
     );
   }

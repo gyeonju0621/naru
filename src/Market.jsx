@@ -42,7 +42,7 @@ const MARKET_EXAMPLE = {
   // 가는 길에서 만나는 것. 자리는 실측, 좌우는 아직 확인 전이라 말하지 않는다
   hazards: [
     // 가게 턱: 레벨의 SM_06_Building_SM_06_Platform(가게 앞 나무 마루) 앞 끝. 마루 윗면이 골목 바닥보다 21cm 높다 (2026-11-23 추출)
-    { id: 'h2', kind: 'sill', x: -4.7, y: 62.85, label: '가게 턱', why: '바퀴가 걸려요', act: '가게 턱을 천천히 내려와요.', gaits: ['aid', 'wheel'] },
+    { id: 'h2', kind: 'sill', x: -4.7, y: 62.85, label: '가게 턱', why: '바퀴가 걸려요', act: '가게 앞 턱을 조심해서 내려가요.', gaits: ['aid', 'wheel'] },
     // P02 맨홀: 레벨의 데칼 MI_Round_Manhole_Cover(2) 자리 그대로 (2026-11-22 추출)
     { id: 'h1', kind: 'manhole', x: 1.5, y: 28.3, label: '맨홀', why: '물이 차면 안 보여요', act: '맨홀을 비켜 가요.', gaits: ['walk', 'aid', 'wheel'] },
   ],
@@ -151,7 +151,7 @@ function upNear(y = 0, x = 0) {
 }
 // ── 조심할 곳 (레벨에서 찾은 것, MARKET.risks). 말: 실제 경보 act[0] '…세요' · 평소 · 연습 act[1] '…요'
 const RISK_KIND = {
-  sill: { label: '가게 턱', icon: 'arrow-down-to-line', why: '바퀴가 걸려요', act: ['가게 턱을 천천히 내려오세요', '가게 턱을 천천히 내려와요'] },
+  sill: { label: '가게 턱', icon: 'arrow-down-to-line', why: '바퀴가 걸려요', act: ['가게 앞 턱을 조심해서 내려가세요', '가게 앞 턱을 조심해서 내려가요'] },
   manhole: { label: '맨홀', icon: 'circle-dot', why: '물에 잠기면 안 보이고, 뚜껑이 들릴 수 있어요', act: ['맨홀은 비켜 가세요', '맨홀은 비켜 가요'] },
   power: { label: '전봇대 · 전기함 · 냉동고', icon: 'zap', why: '물에 닿으면 감전될 수 있어요', act: ['멀리 떨어져 가세요', '멀리 떨어져 가요'] },
   float: { label: '떠내려올 물건', icon: 'package', why: '물이 차면 떠서 부딪혀요', act: ['천천히, 앞을 보며 가세요', '천천히, 앞을 보며 가요'] },

@@ -282,7 +282,7 @@ function EGuide({ go, st, set, night, ui = {}, pop, toast }) {
     const d = Math.max(1, Math.round(cur.s - pg.s));
     ksev = cur.sev;
     kick = <>{cur.side === '발밑' ? '발밑' : `${d}m 앞` + (cur.side === '앞' ? '' : ` ${cur.side}`)} · {cur.kind === 'sill' ? `가게 턱 ${sillCm()}cm` : cur.label}</>;
-    title = cur.kind === 'sill' ? say('가게 턱을 천천히 내려오세요', '가게 턱을 천천히 내려와요') : real ? cur.act[0] : cur.act[1];
+    title = cur.kind === 'sill' ? say('가게 앞 턱을 조심해서 내려가세요', '가게 앞 턱을 조심해서 내려가요') : real ? cur.act[0] : cur.act[1];
   } else {
     kick = out ? <>입구까지 {left}m</> : <>안전한 곳까지 {left}m</>;
     title = tall ? say(`${ro(safe.short)} 가세요`, `${ro(safe.short)} 가요`)
